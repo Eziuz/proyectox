@@ -34,6 +34,7 @@
     padding: 1.5%;
     border: none;
     cursor: pointer;
+    color: #0062cc;
 }
 
 .login-form-1 .btnSubmit {
@@ -60,6 +61,6 @@
     text-decoration: none;
 }
 
-.frmLogin {
-    z-index: 1000;
+.action {
+    margin: 10;
 }

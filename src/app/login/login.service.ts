@@ -23,7 +23,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  login(row: loginModel){
+  login(row: loginModel) {
     httpOptions.headers = new HttpHeaders({
       'Content-Type': 'application/json',
       username: row.username,
@@ -34,14 +34,13 @@ export class LoginService {
 
     const sUrl = `${this.loginUrl}/authenticate`;
 
-    return this.http.post(sUrl, {}, httpOptions).subscribe(
-      (res: HttpResponse<loginModel>) => {
-        sessionStorage.setItem('token', res.headers.get('Authorization'));
-        sessionStorage.setItem('isLogin', 'true');
-      },
-      err =>{
-        console.error(err);
-      }
+    return this.http.post<loginModel>(sUrl, {}, httpOptions).pipe(
+      retry(3),
+      tap((resp: HttpResponse<loginModel>) => {
+        this.log(`login w/ id=${resp.body.username}`);
+        return resp;
+      }),
+      catchError((error) => this.handleError('login', error))
     );
   }
 

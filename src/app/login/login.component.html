@@ -29,17 +29,24 @@
             </div>
         </div>
         <div class="col-md-4 login-form-2">
-            <h3>Hemotec Test</h3>
+            <div>
+                <img src="../../assets/logo.png">
+            </div>
             <form autocomplete="off" [formGroup]="loginForm">
                 <mat-form-field>
                     <input matInput type="text" formControlName="username" placeholder="Usuario:">
                 </mat-form-field>
-
+                <mat-error *ngIf="loginForm.controls.username.invalid && loginForm.controls.username.touched">Usuario Inválido</mat-error>
                 <mat-form-field>
-                    <input matInput type="password " name="password " placeholder="Clave:" [(ngModel)]="login.password ">
+                    <input matInput [type]="!hide ? 'password' : 'text'" name="password" placeholder="Clave:" formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.arial-label]="'Hide password'" [attr.arial-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    </button>
                 </mat-form-field>
-                <div>
-                    <button mat-button (click)="onSubmit()">Login</button>
+                <mat-error *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">Clave Inválida</mat-error>
+                <div class="actions">
+                    <mat-spinner *ngIf="_proc" diameter="5"></mat-spinner>
+                    <button class="btnSubmit" mat-button [disabled]="!loginForm.valid" (click)="onSubmit()">INGRESAR</button>
                 </div>
             </form>
         </div>

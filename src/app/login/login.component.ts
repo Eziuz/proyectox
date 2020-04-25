@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, ValidationErrors } from '@angular/forms';
 import { loginModel } from './login.model';
 import { LoginService } from './login.service';
@@ -15,16 +15,6 @@ import { MatSnackBar, MatBottomSheet } from '@angular/material';
 })
 export class LoginComponent implements OnInit {
 
-  createFormGroup(){
-    return new FormGroup({
-      username: new FormControl(''),
-      password: new FormControl(''),
-      status: new FormControl('')
-    });
-  } 
-
-  loginForm: FormGroup;
-
   constructor(private builder: FormBuilder,
               private loginService: LoginService,
               private _snackBar: MatSnackBar,
@@ -34,41 +24,66 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.createFormGroup();
   }
 
+  loginForm: FormGroup;
+
+
   @Output() logged: EventEmitter<any> = new EventEmitter();
 
-  _status: boolean = false;
+  _status = false;
+  _proc = false;
   resultError: string = null;
   @BlockUI() blockUI: NgBlockUI;
+  hide = false;
 
-  login: loginModel = {
-    username: '',
-    password: '',
-    status: 0
-  };
+  createFormGroup() {
+    return new FormGroup({
+      username: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(3)])
+    });
+  }
 
   ngOnInit(): void {
+
   }
 
-  onSubmit(){
-    console.log('Accion');
+  onSubmit() {
+    if (this.loginForm.valid) {
+      this.blockUI.start('Cargando...');
+      this._proc = true;
+      this.loginService.login(this.loginForm.value).subscribe((resp) => {
+        this.blockUI.stop();
+        if (resp.status === 500) {
+          this.resultError = resp.message.substring(resp.message.indexOf(':') + 2, resp.message.length);
+          this.openNotificationDanger(this.resultError);
+        } else if (resp.status === 401 || resp.status === 412 || resp.status === 403 || resp.status === 404) {
+          this.resultError = resp.message;
+          this.openNotificationDanger(this.resultError);
+        } else {
+          this._status = resp.body.status !== 200;
+          this.resultError = null;
+
+          if (this._status) {
+            this.resultError = 'login error ' + resp.status;
+          } else {
+            sessionStorage.setItem('isLogin', 'true');
+            sessionStorage.setItem('token', resp.headers.get('Authorization'));
+            this.logged.emit(null);
+          }
+        }
+      });
+    }
   }
 
-  handleKeyPress(e){
-    if (e.key === 'Enter'){
+  handleKeyPress(e) {
+    if (e.key === 'Enter') {
       this.onSubmit();
     }
   }
 
-  Login() {
-     return this.loginService.login(this.login);
-  }
 
-
-
-  openNotificationDanger(message: string, action?: string){
+  openNotificationDanger(message: string, action?: string) {
     this._snackBar.open(message, action, {
-      duration: 2000,
-      panelClass: 'dangersnackBar'
+      duration: 5000,
     });
   }
 }
