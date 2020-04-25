@@ -3,18 +3,39 @@
     margin-bottom: 5%;
 }
 
+.img img{
+    height:  150px;
+    margin-left: 25%;
+}
+
+.img2 img{
+    height:  120px;
+    margin-left: 15%;
+    margin-top: 20%;
+}
+
 .login-form-1 {
-    background: #fff;
+    background: #1d6ceb;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    height: 500px;
+}
+
+.title{
+    font-family: 'SkySansW01-BoldSmallCaps';
+    font-size: 30px;
+    color: #fff;
+    margin-top: 7%;
+    margin-left: 7%;
 }
 
 .login-form-1 h3 {
-    padding: 20%;
+    padding: 5%;
     text-align: center;
     color: #333;
 }
 
 .login-form-2 {
-    padding: 5%;
+    padding: 2%;
     background: #fff;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
@@ -26,27 +47,6 @@
 
 .login-container form {
     padding: 10%;
-}
-
-.btnSubmit {
-    width: 50%;
-    border-radius: 1rem;
-    padding: 1.5%;
-    border: none;
-    cursor: pointer;
-    color: #0062cc;
-}
-
-.login-form-1 .btnSubmit {
-    font-weight: 600;
-    color: #0062cc;
-    background-color: #fff;
-}
-
-.login-form-2 .btnSubmit {
-    font-weight: 600;
-    color: #fff;
-    background-color: #0062cc;
 }
 
 .login-form-2 .ForgetPwd {
@@ -61,6 +61,21 @@
     text-decoration: none;
 }
 
-.action {
-    margin: 10;
+.btn-in{
+     border-radius: 28px;
 }
+
+/*Funciones de Responsive*/
+@media screen and (max-width: 900px) {
+    .login-form-1 {
+        display: none;
+    }
+    .login-container {
+        grid-template-columns: 1fr;
+    }
+    .login-form-2  {
+        justify-content: center;
+        height: 50%;
+    }
+}
+
