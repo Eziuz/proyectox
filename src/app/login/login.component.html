@@ -1,6 +1,6 @@
 <div class="container login-container">
     <div class="row">
-        <div class="col-md-9 login-form-1">  
+        <div class="col-md-9 login-form-1">
             <div class="img2">
                 <img src="../../assets/images/Gotita.png">
             </div>
@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-3 login-form-2">
             <div class="img">
-                <img src="../../assets/images/Logo.png">
+                <img src="../../assets/images/logo.png">
             </div>
             <form autocomplete="off" [formGroup]="loginForm">
                 <mat-form-field>
@@ -16,9 +16,16 @@
                 </mat-form-field>
                 <mat-error *ngIf="loginForm.controls.username.invalid && loginForm.controls.username.touched">Usuario Inválido</mat-error>
                 <mat-form-field>
-                    <input matInput [type]="!hide ? 'password' : 'text'" name="password" placeholder="Clave:" formControlName="password">
+                    <input matInput [type]="!hide ? 'password' : 'text'" name="password" placeholder="Clave:" formControlName="password" (keydown)="handleKeyPress($event, loginForm)">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.arial-label]="'Hide password'" [attr.arial-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                        <div *ngIf="!hide; else eye">
+                            <i class="fas fa-eye-slash"></i>
+                        </div>
+                        <ng-template #eye>
+                            <div>
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </ng-template>
                     </button>
                 </mat-form-field>
                 <mat-error *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">Clave Inválida</mat-error>

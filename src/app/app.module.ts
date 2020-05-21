@@ -8,11 +8,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { BlockUIModule } from 'ng-block-ui';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { SideNavComponent } from './nav-menu/side-nav/side-nav.component';
+import { BloodModule } from './components/blood/blood.module';
+import { httpInterceptorProviders } from './interceptors';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    NavMenuComponent,
+    SideNavComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -22,9 +29,10 @@ import { BlockUIModule } from 'ng-block-ui';
     MaterialModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BloodModule,
   ],
-  providers: [],
+  providers: [ httpInterceptorProviders ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

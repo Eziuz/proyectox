@@ -22,6 +22,7 @@ export class AppComponent {
       this.navigationInterceptor(e);
     });
   }
+
   get user(): any {
     var _user;
     try {

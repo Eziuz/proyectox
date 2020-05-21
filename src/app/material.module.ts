@@ -42,7 +42,7 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatTreeModule,
-  MatFormFieldModule,
+  MatFormFieldModule
 } from '@angular/material';
 
 @NgModule({

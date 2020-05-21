@@ -1,0 +1,13 @@
+<section class="row">
+    <div class="col-md-4" *ngFor="let blood of bloods">
+        <h5>{{blood.hemocomponente}}</h5>
+        <img src="{{blood.rutaImg}}" class="card-img-top">
+        <div class="card-body ">
+            <p>Fecha De Recoleccion: {{blood.fechaRecoleccion}}</p>
+            <h5>Fecha De Vencimiento: {{blood.fechaVencimiento}}</h5>
+            <p>Stock: {{blood.cantidad}}</p>
+            <p>Precio: {{blood.precio}}</p>
+            <a href="" class="btn btn-info btn-block">Agregar Novedad</a>
+        </div>
+    </div>
+</section>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap, retry } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { of } from 'rxjs';
+import { catchError, tap, retry } from 'rxjs/operators';
 import { loginModel } from './login.model';
 
 const httpOptions = {

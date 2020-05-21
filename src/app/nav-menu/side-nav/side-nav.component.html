@@ -1,0 +1,27 @@
+<mat-sidenav-container class="mat-sidenav-container-logged">
+    <mat-sidenav #sidenav mode="over" [(opened)]="opened">
+        <img src="../../../assets/images/logonav.png" alt="Logo Hemotec">
+        <mat-nav-list role="navigation" style="width: inherit;">
+            <a mat-list-item routerLink="/users">
+                <i class="fas fa-city"></i>Empresa
+            </a>
+            <a mat-list-item routerLink="app/hemocomponentes">
+                <i class="fas fa-book-medical"></i>Hemocomponentes
+            </a>
+            <a mat-list-item ruterLink="/users">
+                <i class="fas fa-hand-holding-medical"></i>Campañas de Donación
+            </a>
+            <a mat-list-item routerLink="/users">
+                <i class="fas fa-poll"></i>Reportes
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar style=" height: 45px;">
+            <mat-toolbar-row style="padding-top: 45px;">
+                <mat-icon (click)="sidenav.toggle()" style="cursor: pointer;">more_vert</mat-icon>
+            </mat-toolbar-row>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'app/hemocomponentes',
+    loadChildren: () => import('./components/blood/blood.module').then(mod => mod.BloodModule)
   }
 ];
 
