@@ -1,13 +1,20 @@
+<section>
+    <a href="#"class="btn btn-info btn-block">Agregar</a>
+</section>
 <section class="row">
-    <div class="col-md-4" *ngFor="let blood of bloods">
-        <h5>{{blood.hemocomponente}}</h5>
-        <img src="{{blood.rutaImg}}" class="card-img-top">
-        <div class="card-body ">
-            <p>Fecha De Recoleccion: {{blood.fechaRecoleccion}}</p>
-            <h5>Fecha De Vencimiento: {{blood.fechaVencimiento}}</h5>
-            <p>Stock: {{blood.cantidad}}</p>
-            <p>Precio: {{blood.precio}}</p>
-            <a href="" class="btn btn-info btn-block">Agregar Novedad</a>
+    <div class="col-md-3 container" *ngFor="let blood of bloods">
+        <div class="card">
+            <div class="imgBox">
+                <img src="{{blood.rutaImg}}" >
+            </div>
+            <div class="information">
+                <h3>{{blood.hemocomponente}}</h3>
+                <h3>Fecha De Recoleccion: {{blood.fechaRecoleccion}}</h3>
+                <h3>Fecha De Vencimiento: {{blood.fechaVencimiento}}</h3>
+                <h3>Stock: {{blood.cantidad}}</h3>
+                <h3>Precio: {{blood.precio}}</h3>
+                <a href="#">Comprar</a>
+            </div>
         </div>
     </div>
 </section>
