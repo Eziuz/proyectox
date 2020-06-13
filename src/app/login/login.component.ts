@@ -11,7 +11,7 @@ import { MatSnackBar, MatBottomSheet } from '@angular/material';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [LoginService],
+  providers: [ LoginService ],
 })
 export class LoginComponent implements OnInit {
 

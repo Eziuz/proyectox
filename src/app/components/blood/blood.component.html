@@ -1,11 +1,11 @@
-<section>
-    <a href="#"class="btn btn-info btn-block">Agregar</a>
+<section class="mb-2">
+    <button mat-raised-button class="btn btn-warn btn-block" (click)="openDialog()">Agregar</button>
 </section>
 <section class="row">
     <div class="col-md-3 container" *ngFor="let blood of bloods">
         <div class="card">
             <div class="imgBox">
-                <img src="{{blood.rutaImg}}" >
+                <img src="{{blood.rutaImg}}">
             </div>
             <div class="information">
                 <h3>{{blood.hemocomponente}}</h3>

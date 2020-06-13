@@ -14,3 +14,7 @@
     height: 100px;
     vertical-align: middle;
 }
+
+body {
+    overflow: hidden;
+}
