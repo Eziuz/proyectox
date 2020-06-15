@@ -3,7 +3,8 @@ import * as jwt_decode from 'jwt-decode';
 import { Router, NavigationEnd, NavigationStart, NavigationCancel } from '@angular/router';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { Observable, Subscription } from 'rxjs';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav, MatDialog } from '@angular/material';
+import { AddBloodComponent } from 'src/app/components/blood/blood.component';
 
 @Component({
   selector: 'app-side-nav',
@@ -12,8 +13,9 @@ import { MatSidenav } from '@angular/material';
 })
 export class SideNavComponent{
 
-  usuarioDatos: any[]
   opened = false;
+
+  constructor(public dialog: MatDialog) {  }
 
   get user(): any {
     var _user;
@@ -25,5 +27,7 @@ export class SideNavComponent{
     return _user;
   }
 
-
+  openDialog() {
+    this.dialog.open(AddBloodComponent);
+  }
 }

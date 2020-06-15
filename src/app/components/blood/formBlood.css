@@ -1,0 +1,121 @@
+.modalContainer{
+    height: 600px;
+    width: 600px;
+}
+
+.modalContainershow{
+    height: 290px;
+    width: 600px;
+}
+
+mat-form-field{
+    padding-top: 15%;
+    padding-left: 9%;
+}
+
+.buttonfrst{
+    margin-top: 30%;
+    margin-left: 4%;
+}
+
+.buttonsec{
+    margin-top: 9%;
+    margin-left: 50%;
+}
+
+.buttonThrd{
+    margin-top: 7%;
+    margin-left: 70%;
+}
+.buttoncancelfrst{
+    margin-left: 9%;
+}
+
+p{
+    padding-left: 9%;
+}
+
+.modalContainer .card{
+    position: relative;
+    width: 300px;
+    height: 450px;
+    background: #F2F2F2;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-left: 20%;
+}
+
+.modalContainer .card::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #FC210F;
+    clip-path: circle(150px at 80% 20%);
+    transition: 0.5s ease-in-out;
+}
+
+.modalContainer .card:hover::before{
+    clip-path: circle(300px at 80% -20%);
+}
+
+.modalContainer .card .imgBox{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10000;
+    width: 100%;
+    height: 220px;
+    transition: 0.5s;
+}
+
+.modalContainer .card:hover .imgBox{
+    top: 0%;
+    transform: translateY(0%);
+}
+
+.modalContainer .card .imgBox img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 180px;
+}
+
+.modalContainer .card .information{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    transition: 1s;
+    z-index: 10;
+    padding: 19px;
+}
+
+.modalContainer .card:hover .information{
+    height: 220px;
+}
+
+.modalContainer .card .information h3{
+    font-size: 15px;
+}
+
+.modalContainer .card:hover .information h3{
+    position: relative;
+    font-weight: 600;
+}
+
+.modalContainer .card .information a {
+    display: inline-block;
+    padding: 10px 20px;
+    background: red;
+    border-radius: 4px;
+    margin-top: 7px;
+    transform: translateY(10px);
+    transition: 0.5s;
+    text-decoration: none;
+    color: white;
+}

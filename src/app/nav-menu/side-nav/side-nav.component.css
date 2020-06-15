@@ -26,6 +26,33 @@ mat-icon{
     height: 350%;
 }
 
-ul{
+mat-toolbar-row{
+    padding-top: 45px;
+}
+
+mat-sidenav ul li a{
     color: white;
+    text-decoration: none;
+}
+
+mat-sidenav ul li{
+    list-style: none;
+}
+
+.icon{
+    float: left;
+    margin-right: 10px;
+}
+
+mat-toolbar{
+    background-color: #1d6ceb;
+    height: 15%;
+}
+
+mat-sidenav .menu ul{
+    display: none;
+} 
+
+.menu{
+    text-decoration: none;
 }

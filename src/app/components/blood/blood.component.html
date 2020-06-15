@@ -1,20 +1,18 @@
-<section class="mb-2">
-    <button mat-raised-button class="btn btn-warn btn-block" (click)="openDialog()">Agregar</button>
-</section>
-<section class="row">
-    <div class="col-md-3 container" *ngFor="let blood of bloods">
-        <div class="card">
-            <div class="imgBox">
-                <img src="{{blood.rutaImg}}">
-            </div>
-            <div class="information">
-                <h3>{{blood.hemocomponente}}</h3>
-                <h3>Fecha De Recoleccion: {{blood.fechaRecoleccion}}</h3>
-                <h3>Fecha De Vencimiento: {{blood.fechaVencimiento}}</h3>
-                <h3>Stock: {{blood.cantidad}}</h3>
-                <h3>Precio: {{blood.precio}}</h3>
-                <a href="#">Comprar</a>
-            </div>
-        </div>
+<section class="row ">
+  <div class="col-md-3 container" *ngFor="let blood of bloods">
+    <div class="card">
+      <div class="imgBox">
+        <img src="../../../assets/images/bolsapng.png" />
+      </div>
+      <div class="information">
+        <h3>{{ blood.hemocomponente }}</h3>
+        <h3>Fecha De Recoleccion: {{ blood.fechaRecoleccion }}</h3>
+        <h3>Fecha De Vencimiento: {{ blood.fechaVencimiento }}</h3>
+        <h3>Tipo De Sangre: {{ blood.sangre }}</h3>
+        <h3>Stock: {{ blood.cantidad }}</h3>
+        <h3>Precio: {{ blood.precio }}</h3>
+        <a href="#">Añadir</a>
+      </div>
     </div>
+  </div>
 </section>

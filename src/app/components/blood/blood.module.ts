@@ -11,7 +11,7 @@ import { SharedModule } from 'src/app/app.shared.module';
   imports: [
     CommonModule,
     BloodRoutingModule,
-    SharedModule
+    SharedModule,
   ],
 })
 export class BloodModule { }

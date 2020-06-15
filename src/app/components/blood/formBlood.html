@@ -1,35 +1,63 @@
-<mat-horizontal-stepper linear #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-        <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Fill out your name</ng-template>
-            <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-            </mat-form-field>
-            <div>
-                <button mat-button matStepperNext>Next</button>
-            </div>
-        </form>
+<form [formGroup]="Entrada" #form>
+  <mat-horizontal-stepper linear #stepper class="modalContainer">
+    <mat-step label="Datos generales" [stepControl]="Entrada.controls.tipoSangre">
+      <mat-form-field>
+        <mat-label>Hemocomponente:</mat-label>
+        <mat-select formControlName="hemocomponenteFk" #Hemocomponente required>
+          <mat-option *ngFor="let hemocomponente of hemocomponentes"  (click)="getDays(hemocomponente.nombreHemocomponente)" value="{{hemocomponente.idHemocomponente}}">
+            {{ hemocomponente.nombreHemocomponente }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Tipo De Sangre:</mat-label>
+        <mat-select formControlName="tipoSangre">
+          <mat-option *ngFor="let tipoSangre of tipoSangres" (click)="getBloodInfo(tipoSangre.gsrh)" value="{{ tipoSangre.idSangre }}">
+            {{ tipoSangre.gsrh }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-raised-button color="primary" matStepperNext class="buttonfrst">Siguiente</button>
+      </div>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-        <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>Fill out your address</ng-template>
-            <mat-form-field>
-                <mat-label>Address</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-            </mat-form-field>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-            </div>
-        </form>
+    <mat-step label="Rellena el formulario" [stepControl]="Entrada.controls.precio">
+      <mat-form-field>
+        <input matInput [max]="maxDate" formControlName="fechaRecoleccion" [min]="minDate" [matDatepicker]="picker" placeholder="Fecha de recolección" required/>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Cantidad:</mat-label>
+        <input matInput formControlName="cantidad" type="number">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Precio (c/u):</mat-label>
+        <input matInput formControlName="precio" type="number">
+      </mat-form-field>
+      <p>Precio sugerido: ${{precioSugerido}}</p>
+      <div>
+        <button mat-button matStepperPrevious class="buttoncancelfrst" (click)="form.reset()">Atrás</button>
+        <button mat-raised-button color="primary"matStepperNext class="buttonsec" (click)="getTempData()">Siguiente</button>
+      </div>
     </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
-        <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
+    <mat-step label="Listo!">
+        <div class="card">
+          <div class="imgBox">
+            <img src="../../../assets/images/bolsapng.png"/>
+          </div>
+          <div class="information">
+            <h3>{{ fichaTemp.title }}</h3>
+            <h3>Fecha De Recoleccion: {{ fichaTemp.fechaRecoleccion }} </h3>
+            <h3>Tipo De Sangre: {{ fichaTemp.blood }} </h3>
+            <h3>Stock: {{ fichaTemp.cantidad }} </h3>
+            <h3>Precio: {{ fichaTemp.precio }} </h3>
+          </div>
         </div>
+      <div>
+        <button mat-raised-button matStepperPrevious>Atrás</button>
+        <button mat-raised-button color="primary" class="buttonThrd" (click)="createBlood()">Confirmar</button>
+      </div>
     </mat-step>
-</mat-horizontal-stepper>
+  </mat-horizontal-stepper>
+</form>

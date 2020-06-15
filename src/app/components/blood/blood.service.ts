@@ -45,8 +45,45 @@ export class BloodService {
     );
   }
 
+  getDateFormat(form) {
+    const date = new Date(form.fechaRecoleccion);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    let fecha;
 
+    if (month < 10) {
+      if (day >= 10) {
+        fecha = `${year}-0${month}-${day}`;
+      } else {
+        fecha = `${year}-0${month}-0${day}`;
+      }
+    } else {
+      if (day >= 10) {
+        fecha = `${year}-${month}-${day}`;
+      } else {
+        fecha = `${year}-${month}-0${day}`;
+      }
+    }
 
+    return fecha;
+  }
+
+  createBlood(row) {
+    const request = {
+      idHemocomponente: row.hemocomponenteFk,
+      idSangre: row.tipoSangre,
+      fechaRecoleccion: this.getDateFormat(row),
+      precio: row.precio,
+      cantidad: row.cantidad
+    }
+    const sUrl = `${this.serviceUrl}/DetalleEntrada`;
+    return this.http.put(sUrl, request, {}).pipe(
+      tap((resp) => {
+        return resp;
+      }), catchError((error) => this.handleError('blood', error))
+    );
+  }
 
   handleError(operation = 'operation', result?: any) {
     console.log(result.error);
