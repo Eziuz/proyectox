@@ -9,16 +9,19 @@ import { BlockUIModule } from 'ng-block-ui';
 import { SideNavComponent } from './nav-menu/side-nav/side-nav.component';
 import { SharedModule } from './app.shared.module';
 import { AddBloodComponent } from './components/blood/blood.component';
+import { FridgeComponent } from './components/Fridge/fridge.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SideNavComponent,
-    AddBloodComponent
+    AddBloodComponent,
+    FridgeComponent
   ],
   entryComponents: [
-    AddBloodComponent
+    AddBloodComponent,
+    FridgeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

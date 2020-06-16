@@ -1,6 +1,6 @@
 <mat-sidenav-container class="mat-sidenav-container-logged">
   <mat-sidenav #sidenav mode="over" [(opened)]="opened">
-    <img src="../../assets/images/logo.png" alt="Logo Hemotec">
+    <img src="../../../assets/images/logoSide.png" alt="Logo Hemotec">
     <mat-nav-list role="navigation" style="width: inherit;">
       <ul class="menu">
         <li><a mat-list-item routerLink="/users"><i class="icon fas fa-city"></i>Empresa</a>
@@ -10,40 +10,31 @@
           <li><a mat-list-item href="#" >item 3</a></li>
         </ul>
         </li>
-        <li> <a mat-list-item routerLink="app/hemocomponentes"><i class="icon fas fa-book-medical"></i>Hemocomponentes</a>
-          <ul>
-            <li><a mat-list-item href="#" >item 1</a></li>
-            <li><a mat-list-item href="#" >item 2</a></li>
-            <li><a mat-list-item href="#" >item 3</a></li>
-          </ul></li>
-        <li><a mat-list-item routerLink="/users"><i class="icon fas fa-hand-holding-medical"></i>Campañas de Donación</a>
-          <ul>
-            <li><a mat-list-item href="#" >item 1</a></li>
-            <li><a mat-list-item href="#" >item 2</a></li>
-            <li><a mat-list-item href="#" >item 3</a></li>
-          </ul></li>
-        <li><a mat-list-item routerLink="/users"><i class="icon fas fa-poll"></i>Reportes</a>
-          <ul>
-            <li><a mat-list-item href="#" >item 1</a></li>
-            <li><a mat-list-item href="#" >item 2</a></li>
-            <li><a mat-list-item href="#" >item 3</a></li>
-          </ul></li>
+        <li> <a mat-list-item routerLink="app/hemocomponentes"><i class="icon fas fa-book-medical"></i>Hemocomponentes</a></li>
+        <li><a mat-list-item routerLink="/users"><i class="icon fas fa-hand-holding-medical"></i>Campañas de Donación</a></li>
+        <li><a mat-list-item routerLink="/users"><i class="icon fas fa-poll"></i>Reportes</a></li>
       </ul>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar>
       <mat-toolbar-row class="d-flex justify-content-between">
-        <mat-icon (click)="sidenav.toggle()" style="cursor: pointer;">more_vert</mat-icon>
+        <mat-icon class="menuButton"(click)="sidenav.toggle()" style="cursor: pointer;">menu</mat-icon>
+        <img class="logoHead" src="../../../assets/images/logohead.png" alt="Imagen mamalona de cabecera :v">
         <section>
-            <button mat-raised-button class="" (click)="openDialog()">Agregar</button>
-          </section>
-          {{ user.iss }}<i class="fas fa-user"></i>
-          <i class="fas fa-power-off"></i>
+          <button class="btn btn-light" (click)="openDialog()"><i class="fas fa-plus"></i>Agregar</button>
+        </section>
+        <section>
+          <button class="btn btn-light"  (click)="openFridge()">Nevera</button>
+        </section>
+        {{ user.iss }}<i class="fas fa-user"></i>
+        <span style="cursor: pointer;" (click)="logout()">
+          <i class="logout fas fa-power-off"></i>
+        </span>
       </mat-toolbar-row>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-<script src="../../../assets/main.js"></script>
+<script src="../../../assets/sidenav.js"></script>

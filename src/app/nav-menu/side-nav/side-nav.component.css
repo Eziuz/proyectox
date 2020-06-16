@@ -1,58 +1,113 @@
 .mat-sidenav-container-logged {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 img {
-    margin-top: 5%;
-    height: 20%;
-    width: 30%;
-    margin-left: 30%;
+  margin-top: 5%;
+  height: 20%;
+  width: 30%;
+  margin-left: 30%;
 }
 
-mat-sidenav{
-    width: 20%;
-    background: #1d6ceb;
+mat-sidenav {
+  width: 20%;
+  background: #1d6ceb;
 }
 
-mat-toolbar{
-    background:white;
+mat-toolbar {
+  background: white;
 }
 
-mat-icon{
-    height: 350%;
+mat-icon {
+  height: 350%;
 }
 
-mat-toolbar-row{
-    padding-top: 45px;
+mat-toolbar-row {
+  padding-top: 45px;
 }
 
-mat-sidenav ul li a{
-    color: white;
-    text-decoration: none;
+mat-sidenav ul li a {
+  color: white;
+  text-decoration: none;
 }
 
-mat-sidenav ul li{
-    list-style: none;
+mat-sidenav ul li {
+  list-style: none;
 }
 
-.icon{
-    float: left;
-    margin-right: 10px;
+.icon {
+  float: left;
+  margin-right: 10px;
 }
 
-mat-toolbar{
-    background-color: #1d6ceb;
-    height: 15%;
+mat-toolbar {
+  background-color: #1d6ceb;
+  height: 15%;
 }
 
-mat-sidenav .menu ul{
-    display: none;
-} 
+mat-sidenav .menu ul {
+  display: none;
+}
 
-.menu{
-    text-decoration: none;
+.menu {
+  text-decoration: none;
+}
+
+#menu a,
+label {
+  display: block;
+  padding: 15px;
+}
+
+#menu>li {
+  margin: 0 0 5% 0;
+}
+
+li>ul {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 200px;
+  box-shadow: 3px 0 10fx rgba(0, 0, 0, .2);
+  /*animation: aparecer .7s;*/
+  z-index: 1000px;
+}
+
+
+/* Animaciones */
+
+@keyframes aparecer {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* logo de cabecera*/
+.logoHead{
+  height: 100px;
+  margin-bottom: 5%;
+  float: left;
+}
+
+/*Boton de side-bar*/
+
+.menuButton{
+  height: 30px ;
+  width: 30px;
+  color: white;
+}
+
+
+.menuButton:hover{
+  color: black;
+}
+
+/*log-out button*/
+
+.logout{
+  color: white;
+  margin-right: 50px;
 }

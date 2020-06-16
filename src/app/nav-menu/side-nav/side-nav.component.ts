@@ -5,17 +5,19 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { Observable, Subscription } from 'rxjs';
 import { MatSidenav, MatDialog } from '@angular/material';
 import { AddBloodComponent } from 'src/app/components/blood/blood.component';
+import { FridgeComponent } from 'src/app/components/Fridge/fridge.component';
 
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.css']
 })
-export class SideNavComponent{
+export class SideNavComponent {
 
   opened = false;
+  @BlockUI() blockUI: NgBlockUI;
 
-  constructor(public dialog: MatDialog) {  }
+  constructor(public dialog: MatDialog) { }
 
   get user(): any {
     var _user;
@@ -29,5 +31,16 @@ export class SideNavComponent{
 
   openDialog() {
     this.dialog.open(AddBloodComponent);
+  }
+
+  openFridge() {
+    this.dialog.open(FridgeComponent);
+  }
+
+  logout() {
+    this.blockUI.start('Cerrando Sesión');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('isLogin');
+    this.blockUI.stop();
   }
 }

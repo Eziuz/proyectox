@@ -11,7 +11,13 @@
         <h3>Tipo De Sangre: {{ blood.sangre }}</h3>
         <h3>Stock: {{ blood.cantidad }}</h3>
         <h3>Precio: {{ blood.precio }}</h3>
-        <a href="#">Añadir</a>
+        <form [formGroup]="formFridge">
+          <mat-form-field>
+            <mat-label>Cantidad:</mat-label>
+            <input matInput formControlName="cantidad" type="number" min="1" max="{{ blood.cantidad }}">
+          </mat-form-field>
+          <a style="cursor: pointer;" (click)="getObjectToFridge(blood.idDetalleEntrada)">Añadir</a>
+        </form>
       </div>
     </div>
   </div>

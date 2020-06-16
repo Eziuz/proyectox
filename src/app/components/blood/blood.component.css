@@ -7,7 +7,7 @@
     .container .card{
         position: relative;
         width: 300px;
-        height: 450px;
+        height: 500px;
         background: #F2F2F2;
         border-radius: 20px;
         overflow: hidden;
@@ -65,7 +65,7 @@
     }
     
     .container .card:hover .information{
-        height: 250px;
+        height: 310px;
     }
     
     .container .card .information h3{

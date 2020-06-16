@@ -15,9 +15,6 @@ import { Router } from '@angular/router';
 })
 export class BloodComponent implements OnInit {
 
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-
   constructor(private bloodService: BloodService,
               private snackBar: MatSnackBar,
               private _formBuilder: FormBuilder,
@@ -27,9 +24,29 @@ export class BloodComponent implements OnInit {
   resultError: string = null;
   status = false;
   bloods: any = [];
+  formFridge;
+  arrayFridge = new Array();
 
   ngOnInit() {
     this.getAll();
+    this.formFridge = this.createFridgeForm();
+  }
+
+  getObjectToFridge(IdCompra) {
+    const element = this.bloods.filter(item => {
+      return item.idDetalleEntrada === IdCompra;
+    });
+    var newCantidad = this.formFridge.controls.cantidad.value;
+    element.cantidad = newCantidad;
+    this.arrayFridge.push(element);
+    alert('Hemocomponente agregado a la nevera');
+    sessionStorage.setItem('fridge', JSON.stringify(this.arrayFridge));
+  }
+
+  createFridgeForm() {
+    return new FormGroup({
+      cantidad: new FormControl('', [Validators.required])
+    });
   }
 
   getAll() {
@@ -103,7 +120,7 @@ export class AddBloodComponent implements OnInit {
     const element = this.hemocomponentes.find(item => {
       return item.nombreHemocomponente === innerText;
     });
-    let date = new Date();
+    const date = new Date();
     date.setDate(date.getDate() - element.diasVigencia);
     this.minDate = date;
     this.fichaTemp.title = innerText;
