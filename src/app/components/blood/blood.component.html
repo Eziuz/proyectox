@@ -1,6 +1,6 @@
 <section class="row ">
   <div class="col-md-3 container" *ngFor="let blood of bloods">
-    <div class="card">
+    <div class="{{Trafficlights(blood.idDetalleEntrada)}}">
       <div class="imgBox">
         <img src="../../../assets/images/bolsapng.png" />
       </div>
@@ -14,7 +14,7 @@
         <form [formGroup]="formFridge">
           <mat-form-field>
             <mat-label>Cantidad:</mat-label>
-            <input matInput formControlName="cantidad" type="number" min="1" max="{{ blood.cantidad }}">
+            <input matInput formControlName="cantidad" type="number" min="1" max="{{blood.cantidad}}">
           </mat-form-field>
           <a style="cursor: pointer;" (click)="getObjectToFridge(blood.idDetalleEntrada)">Añadir</a>
         </form>

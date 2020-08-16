@@ -33,13 +33,13 @@ export class AppComponent {
     return _user;
   }
 
-  @HostListener('window:beforeunload', ['$event']) unloadHandler(event: Event) {
+  /*@HostListener('window:beforeunload', ['$event']) unloadHandler(event: Event) {
     event.returnValue = false;
-  }
+  }*/
 
-  ngAfterViewInit(){
-    
+  ngAfterViewInit() {
   }
+  
   navigationInterceptor(event: RouterEvent): void {
     if (event instanceof NavigationStart) {
       this.blockUI.start('Cargando Información...');

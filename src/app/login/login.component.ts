@@ -68,6 +68,7 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem('isLogin', 'true');
             sessionStorage.setItem('token', resp.headers.get('Authorization'));
             this.logged.emit(null);
+            this.router.navigateByUrl('hemocomponentes');
           }
         }
       });

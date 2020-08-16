@@ -17,7 +17,8 @@ export class SideNavComponent {
   opened = false;
   @BlockUI() blockUI: NgBlockUI;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,
+              public router: Router) { }
 
   get user(): any {
     var _user;
@@ -38,6 +39,7 @@ export class SideNavComponent {
   }
 
   logout() {
+    this.router.navigateByUrl('/');
     this.blockUI.start('Cerrando Sesión');
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('isLogin');

@@ -1,9 +1,9 @@
 <body>
-    <div *ngIf="!isLogin">
-        <app-login></app-login>
-    </div>
-    <div *ngIf="isLogin">
-        <app-side-nav></app-side-nav>
-    </div>
-    <block-ui></block-ui>
+  <div *ngIf="!isLogin">
+    <router-outlet></router-outlet>
+  </div>
+  <div *ngIf="isLogin">
+    <app-side-nav></app-side-nav>
+  </div>
+  <block-ui></block-ui>
 </body>

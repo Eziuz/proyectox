@@ -2,16 +2,23 @@
   <mat-sidenav #sidenav mode="over" [(opened)]="opened">
     <img src="../../../assets/images/logoSide.png" alt="Logo Hemotec">
     <mat-nav-list role="navigation" style="width: inherit;">
+      <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+      </mat-menu>
       <ul class="menu">
         <li><a mat-list-item routerLink="/users"><i class="icon fas fa-city"></i>Empresa</a>
-        <ul>
-          <li><a mat-list-item href="#" >item 1</a></li>
-          <li><a mat-list-item href="#" >item 2</a></li>
-          <li><a mat-list-item href="#" >item 3</a></li>
-        </ul>
+          <ul>
+            <li><a mat-list-item href="#">item 1</a></li>
+            <li><a mat-list-item href="#">item 2</a></li>
+            <li><a mat-list-item href="#">item 3</a></li>
+          </ul>
         </li>
-        <li> <a mat-list-item routerLink="app/hemocomponentes"><i class="icon fas fa-book-medical"></i>Hemocomponentes</a></li>
-        <li><a mat-list-item routerLink="/users"><i class="icon fas fa-hand-holding-medical"></i>Campañas de Donación</a></li>
+        <li> <a mat-list-item routerLink="/hemocomponentes"><i
+              class="icon fas fa-book-medical"></i>Hemocomponentes</a></li>
+        <li><a mat-list-item routerLink="/users"><i class="icon fas fa-hand-holding-medical"></i>Campañas de
+            Donación</a></li>
         <li><a mat-list-item routerLink="/users"><i class="icon fas fa-poll"></i>Reportes</a></li>
       </ul>
     </mat-nav-list>
@@ -19,13 +26,13 @@
   <mat-sidenav-content>
     <mat-toolbar>
       <mat-toolbar-row class="d-flex justify-content-between">
-        <mat-icon class="menuButton"(click)="sidenav.toggle()" style="cursor: pointer;">menu</mat-icon>
+        <mat-icon class="menuButton" (click)="sidenav.toggle()" style="cursor: pointer;">menu</mat-icon>
         <img class="logoHead" src="../../../assets/images/logohead.png" alt="Imagen mamalona de cabecera :v">
         <section>
           <button class="btn btn-light" (click)="openDialog()"><i class="fas fa-plus"></i>Agregar</button>
         </section>
         <section>
-          <button class="btn btn-light"  (click)="openFridge()">Nevera</button>
+          <button class="btn btn-light" (click)="openFridge()">Nevera</button>
         </section>
         {{ user.iss }}<i class="fas fa-user"></i>
         <span style="cursor: pointer;" (click)="logout()">

@@ -11,12 +11,14 @@
                 <img src="../../assets/images/logo.png">
             </div>
             <form autocomplete="off" [formGroup]="loginForm">
-                <mat-form-field>
-                    <input matInput type="text" formControlName="username" placeholder="Usuario:">
+                <mat-form-field appearance="outline">
+                    <mat-label>Usuario:</mat-label>
+                    <input matInput type="text" formControlName="username">
                 </mat-form-field>
                 <mat-error *ngIf="loginForm.controls.username.invalid && loginForm.controls.username.touched">Usuario Inválido</mat-error>
-                <mat-form-field>
-                    <input matInput [type]="!hide ? 'password' : 'text'" name="password" placeholder="Clave:" formControlName="password" (keydown)="handleKeyPress($event, loginForm)">
+                <mat-form-field appearance="outline">
+                    <mat-label>Clave:</mat-label>
+                    <input matInput [type]="!hide ? 'password' : 'text'" name="password" formControlName="password" (keydown)="handleKeyPress($event, loginForm)">
                     <span mat-icon-button matSuffix (click)="hide = !hide" [attr.arial-label]="'Hide password'" [attr.arial-pressed]="hide">
                         <div *ngIf="hide; else eye">
                             <i class="fas fa-eye-slash"></i>
@@ -30,8 +32,8 @@
                 </mat-form-field>
                 <mat-error *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">Clave Inválida</mat-error>
                 <div class="actions">
-                    <mat-spinner *ngIf="_proc" diameter="5"></mat-spinner>
-                    <button type="submit" class="btn-in btn btn-primary btn-lg btn-block" mat-button [disabled]="!loginForm.valid" (click)="onSubmit()">Log  In</button>
+                    <span><a routerLink="/changePassword">Olvidaste tu contraseña?</a></span>
+                    <button type="submit" class="btn-in btn btn-primary btn-lg btn-block" mat-button [disabled]="!loginForm.valid" (click)="onSubmit()">Iniciar Sesión </button>
                 </div>
             </form>
         </div>

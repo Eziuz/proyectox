@@ -10,6 +10,9 @@ import { SideNavComponent } from './nav-menu/side-nav/side-nav.component';
 import { SharedModule } from './app.shared.module';
 import { AddBloodComponent } from './components/blood/blood.component';
 import { FridgeComponent } from './components/Fridge/fridge.component';
+import { NotFoundComponent } from './components/work/found.component';
+import { MainComponent } from './components/main/main.component';
+import { UserRegisterComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -17,11 +20,15 @@ import { FridgeComponent } from './components/Fridge/fridge.component';
     LoginComponent,
     SideNavComponent,
     AddBloodComponent,
-    FridgeComponent
+    FridgeComponent,
+    NotFoundComponent,
+    MainComponent,
+    UserRegisterComponent
   ],
   entryComponents: [
     AddBloodComponent,
-    FridgeComponent
+    FridgeComponent,
+    UserRegisterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

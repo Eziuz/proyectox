@@ -2,21 +2,39 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { NotFoundComponent } from './components/work/found.component';
+import { MainComponent } from './components/main/main.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent,
+    component: MainComponent,
     pathMatch: 'full'
+  },
+  {
+    path: 'index',
+    loadChildren: () => import('./components/main/main.module').then(mod => mod.MainModule)
   },
   {
     path: 'login',
     component: LoginComponent,
   },
   {
-    path: 'app/hemocomponentes',
+    path: 'hemocomponentes',
     loadChildren: () => import('./components/blood/blood.module').then(mod => mod.BloodModule)
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./components/user/user.module').then(mod => mod.UserModule)
+  },
+  {
+    path: 'changePassword',
+    loadChildren: () => import('./components/password/password.module').then(mod => mod.PasswordModule)
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 

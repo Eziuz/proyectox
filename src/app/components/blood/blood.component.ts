@@ -11,24 +11,27 @@ import { Router } from '@angular/router';
   selector: 'app-blood',
   templateUrl: './blood.component.html',
   styleUrls: ['./blood.component.css'],
-  providers: [BloodService,]
+  providers: [BloodService, HemocomponenteService]
 })
 export class BloodComponent implements OnInit {
 
   constructor(private bloodService: BloodService,
-              private snackBar: MatSnackBar,
+              private _snackBar: MatSnackBar,
               private _formBuilder: FormBuilder,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private hemocomponenteService: HemocomponenteService) { }
 
   @BlockUI() blockUI: NgBlockUI;
   resultError: string = null;
   status = false;
   bloods: any = [];
+  hemocomponentes: any = [];
   formFridge;
   arrayFridge = new Array();
 
   ngOnInit() {
     this.getAll();
+    this.getAllHemocomponentes();
     this.formFridge = this.createFridgeForm();
   }
 
@@ -36,17 +39,52 @@ export class BloodComponent implements OnInit {
     const element = this.bloods.filter(item => {
       return item.idDetalleEntrada === IdCompra;
     });
-    var newCantidad = this.formFridge.controls.cantidad.value;
-    element.cantidad = newCantidad;
-    this.arrayFridge.push(element);
-    alert('Hemocomponente agregado a la nevera');
-    sessionStorage.setItem('fridge', JSON.stringify(this.arrayFridge));
+    const newCantidad = this.formFridge.controls.cantidad.value;
+
+    if (element[0].cantidad >= newCantidad && newCantidad !== 0) {
+      this.arrayFridge.push({
+        idElemento: element[0].idDetalleEntrada,
+        hemocomponente: element[0].hemocomponente,
+        cantidad: newCantidad,
+        fechaRecoleccion: element[0].fechaRecoleccion,
+        fechaVencimiento: element[0].fechaVencimiento,
+        sangre: element[0].sangre,
+        precio: element[0].precio
+      });
+      this.openNotificationDanger('Hemocomponente(s) agregado(s) a la nevera', 'Ok!');
+      sessionStorage.setItem('fridge', JSON.stringify(this.arrayFridge));
+    } else if (newCantidad === 0) {
+      this.openNotificationDanger('Digite un valor diferente de cero', 'Ok!');
+    } else {
+      this.openNotificationDanger('Ha excedido la cantidad existente', 'Ok!');
+    }
   }
 
   createFridgeForm() {
     return new FormGroup({
       cantidad: new FormControl('', [Validators.required])
     });
+  }
+
+  Trafficlights(IdDetalleEntrada) {
+    const element = this.bloods.filter(item => {
+      return item.idDetalleEntrada === IdDetalleEntrada;
+    });
+    const today = new Date();
+    const element2 = this.hemocomponentes.find(item => {
+      return item.idHemocomponente === element[0].idHemocomponente;
+    });
+
+    const fecha = new Date(element[0].fechaVencimiento);
+    const trafficLight = Math.round((fecha.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+
+    if (trafficLight > element2.diasNaranja) {
+      return 'Green';
+    } else if (trafficLight <= element2.diasNaranja && trafficLight > element2.diasRojo) {
+      return 'Yellow';
+    } else {
+      return 'Red';
+    }
   }
 
   getAll() {
@@ -61,8 +99,17 @@ export class BloodComponent implements OnInit {
       });
   }
 
+  getAllHemocomponentes() {
+    this.hemocomponenteService.getAll().subscribe((resp) => {
+      this.hemocomponentes = resp;
+    },
+      (err) => {
+        console.error(err);
+      });
+  }
+
   openNotificationDanger(message: string, action?: string) {
-    this.snackBar.open(message, action, {
+    this._snackBar.open(message, action, {
       duration: 5000,
     });
   }

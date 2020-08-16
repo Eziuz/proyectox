@@ -4,7 +4,7 @@
     padding-left: 3%;
     }
 
-    .container .card{
+    .container .Red{
         position: relative;
         width: 300px;
         height: 500px;
@@ -13,7 +13,7 @@
         overflow: hidden;
     }
     
-    .container .card::before{
+    .container .Red::before{
         content: '';
         position: absolute;
         top: 0;
@@ -26,11 +26,11 @@
         transition: 0.5s ease-in-out;
     }
     
-    .container .card:hover::before{
+    .container .Red:hover::before{
         clip-path: circle(300px at 80% -20%);
     }
     
-    .container .card .imgBox{
+    .container .Red .imgBox{
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -40,12 +40,12 @@
         transition: 0.5s;
     }
     
-    .container .card:hover .imgBox{
+    .container .Red:hover .imgBox{
         top: 0%;
         transform: translateY(0%);
     }
     
-    .container .card .imgBox img{
+    .container .Red .imgBox img{
         position: absolute;
         top: 50%;
         left: 50%;
@@ -53,7 +53,7 @@
         width: 180px;
     }
     
-    .container .card .information{
+    .container .Red .information{
         position: absolute;
         bottom: 0;
         width: 100%;
@@ -64,20 +64,20 @@
         padding: 19px;
     }
     
-    .container .card:hover .information{
+    .container .Red:hover .information{
         height: 310px;
     }
     
-    .container .card .information h3{
+    .container .Red .information h3{
         font-size: 15px;
     }
     
-    .container .card:hover .information h3{
+    .container .Red:hover .information h3{
         position: relative;
         font-weight: 600;
     }
     
-    .container .card .information a {
+    .container .Red .information a {
         display: inline-block;
         padding: 10px 20px;
         background: red;   /* Color Tarjeta */
@@ -89,4 +89,176 @@
         color: white;
     }
     
+    /* Semaforo Amarillo */
+
+    .container .Yellow{
+        position: relative;
+        width: 300px;
+        height: 500px;
+        background: #F2F2F2;
+        border-radius: 20px;
+        overflow: hidden;
+    }
     
+    .container .Yellow::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: yellowgreen; /* Color Tarjeta */
+
+        clip-path: circle(150px at 80% 20%);
+        transition: 0.5s ease-in-out;
+    }
+    
+    .container .Yellow:hover::before{
+        clip-path: circle(300px at 80% -20%);
+    }
+    
+    .container .Yellow .imgBox{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10000;
+        width: 100%;
+        height: 220px;
+        transition: 0.5s;
+    }
+    
+    .container .Yellow:hover .imgBox{
+        top: 0%;
+        transform: translateY(0%);
+    }
+    
+    .container .Yellow .imgBox img{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 180px;
+    }
+    
+    .container .Yellow .information{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100px;
+        text-align: center;
+        transition: 1s;
+        z-index: 10;
+        padding: 19px;
+    }
+    
+    .container .Yellow:hover .information{
+        height: 310px;
+    }
+    
+    .container .Yellow .information h3{
+        font-size: 15px;
+    }
+    
+    .container .Yellow:hover .information h3{
+        position: relative;
+        font-weight: 600;
+    }
+    
+    .container .Yellow .information a {
+        display: inline-block;
+        padding: 10px 20px;
+        background: red;   /* Color Tarjeta */
+        border-radius: 4px;
+        margin-top: 7px;
+        transform: translateY(10px);
+        transition: 0.5s;
+        text-decoration: none;
+        color: white;
+    }
+    
+    /* Semaforo Verde */
+
+    .container .Green{
+        position: relative;
+        width: 300px;
+        height: 500px;
+        background: #F2F2F2;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+    
+    .container .Green::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: green; /* Color Tarjeta */
+
+        clip-path: circle(150px at 80% 20%);
+        transition: 0.5s ease-in-out;
+    }
+    
+    .container .Green:hover::before{
+        clip-path: circle(300px at 80% -20%);
+    }
+    
+    .container .Green .imgBox{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10000;
+        width: 100%;
+        height: 220px;
+        transition: 0.5s;
+    }
+    
+    .container .Green:hover .imgBox{
+        top: 0%;
+        transform: translateY(0%);
+    }
+    
+    .container .Green .imgBox img{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 180px;
+    }
+    
+    .container .Green .information{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100px;
+        text-align: center;
+        transition: 1s;
+        z-index: 10;
+        padding: 19px;
+    }
+    
+    .container .Green:hover .information{
+        height: 310px;
+    }
+    
+    .container .Green .information h3{
+        font-size: 15px;
+    }
+    
+    .container .Green:hover .information h3{
+        position: relative;
+        font-weight: 600;
+    }
+    
+    .container .Green .information a {
+        display: inline-block;
+        padding: 10px 20px;
+        background: red;   /* Color Tarjeta */
+        border-radius: 4px;
+        margin-top: 7px;
+        transform: translateY(10px);
+        transition: 0.5s;
+        text-decoration: none;
+        color: white;
+    }

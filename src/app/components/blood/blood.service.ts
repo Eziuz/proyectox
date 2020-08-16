@@ -76,7 +76,7 @@ export class BloodService {
       fechaRecoleccion: this.getDateFormat(row),
       precio: row.precio,
       cantidad: row.cantidad
-    }
+    };
     const sUrl = `${this.serviceUrl}/DetalleEntrada`;
     return this.http.put(sUrl, request, {}).pipe(
       tap((resp) => {
