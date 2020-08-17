@@ -33,6 +33,10 @@ const routes: Routes = [
     loadChildren: () => import('./components/password/password.module').then(mod => mod.PasswordModule)
   },
   {
+    path: 'registerbusiness',
+    loadChildren: () => import('./components/business/register/registerBusiness.module').then(mod => mod.RegisterBusinessModule)
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }

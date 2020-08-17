@@ -28,11 +28,39 @@ export class UserService {
         );
     }
 
-    createUser(row) {
-        const request = [
-        ];
+    createUser(row, password, idEmpresaI) {
+        const request = {
+            primerNombre: row.primerNombre,
+            segundoNombre: row.segundoNombre,
+            primerApellido: row.primerApellido,
+            segundoApellido: row.segundoApellido,
+            genero: row.genero,
+            username: row.username,
+            contrasena: password,
+            correo: row.email,
+            idEmpresa: idEmpresaI,
+            idRol: row.rol
+        };
+        const sUrl = `${this.serviceUrl}/Administracion/Usuarios`;
+        return this.http.put(sUrl, request, {}).pipe(
+            tap((resp) => {
+                return resp;
+            }), catchError((error) => this.handleError('user', error))
+        );
     }
 
+    updateUserStatus(row, newStatus) {
+        const request = {
+            idPersona: row.idPersona,
+            idEstado: newStatus
+        };
+        const sUrl = `${this.serviceUrl}/Administracion/Usuarios/Status`;
+        return this.http.post(sUrl, request, {}).pipe(
+            tap((resp) => {
+                return resp;
+            }), catchError((error) => this.handleError('user', error))
+        );
+    }
 
     handleError(operation = 'operation', result?: any) {
         console.log(result.error);

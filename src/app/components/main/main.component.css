@@ -1874,7 +1874,7 @@ body {
   #footer {
     color: #444444;
     font-size: 14px;
-    background: #f6f4f4;
+    background: #f4f4f6;
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
   }
   
@@ -2019,9 +2019,5 @@ body {
     transition: 0.3s;
   }
   
-  #footer .social-links a:hover {
-    background: #d01d3f;
-    color: #fff;
-    text-decoration: none;
-  }
+
   

@@ -1,10 +1,10 @@
 <form [formGroup]="userData" #form>
   <mat-horizontal-stepper linear #stepper style="width: 500px;">
-    <mat-step label="Datos generales">
+    <mat-step label="Datos generales" [stepControl]="userData.controls.email">
       <div class="form-inline">
         <mat-form-field appearance="outline">
           <mat-label>Primer Nombre:</mat-label>
-          <input matInput type="text" formControlName="primerNombre" autofocus>
+          <input matInput type="text" formControlName="primerNombre" (focus)="getRolesPerUser()">
         </mat-form-field>
         <mat-form-field appearance="outline" class="ml-3">
           <mat-label>Segundo Nombre:</mat-label>
@@ -25,21 +25,47 @@
             <mat-option value="F">Femenino</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="ml-3">
-          <mat-label>Username:</mat-label>
-          <input matInput type="text" formControlName="username">
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="ml-3">
+            <mat-label>Username:</mat-label>
+            <input matInput type="text" formControlName="username" (focusout)="findSameUser()">
+            <div mat-icon matSuffix id="alert-msj">
+              <div *ngIf="same">
+                <i class="fas fa-times"></i>
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Correo:</mat-label>
+          <input matInput type="email" formControlName="email" (focusout)="findSameEmail()">
+          <div mat-icon matSuffix id="alert-msj-email">
+            <div *ngIf="sameEmail">
+              <i class="fas fa-times"></i>
+            </div>
+          </div>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Email:</mat-label>
-          <input matInput type="email" formControlName="email">
+          <mat-label>Rol:</mat-label>
+          <mat-select formControlName="rol">
+            <mat-option *ngFor="let rol of roles" value="{{ rol.idRol }}">{{ rol.tipoRol }}</mat-option>
+          </mat-select>
         </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-select formControlName="genero">
-                <mat-option value="M">Masculino</mat-option>
-                <mat-option value="F">Femenino</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" matStepperNext class="btnNext">Siguiente</button>
+      </div>
+    </mat-step>
+    <mat-step label="Confirmación">
+
+      <h3>Aquí debe colocar un mensaje bien bonito de que enviamos un correo a : {{ this.userData.value.email }}</h3>
+
+
+
+      <div>
+        <button mat-button matStepperPrevious class="buttoncancelfrst" (click)="form.reset()">Atrás</button>
+        <button mat-raised-button color="primary" (click)="createUser()">Terminado</button>
+      </div>
     </mat-step>
   </mat-horizontal-stepper>
 </form>

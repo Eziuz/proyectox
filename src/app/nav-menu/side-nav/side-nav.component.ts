@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { MatSidenav, MatDialog } from '@angular/material';
 import { AddBloodComponent } from 'src/app/components/blood/blood.component';
 import { FridgeComponent } from 'src/app/components/Fridge/fridge.component';
+import { RolService } from 'src/app/services/rol.service';
 
 @Component({
   selector: 'app-side-nav',
