@@ -1,1 +1,120 @@
-<h3> TAMO ACTIVO MI LOCO </h3>
+<div class="mt-5 container">
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step label="Datos de la Empresa" [stepControl]="businessData.controls.telefono">
+      <form [formGroup]="businessData" autocomplete="off">
+        <div class="form-inline">
+          <mat-form-field appearance="fill">
+            <mat-label>Nombre de la empresa:</mat-label>
+            <input matInput type="text" formControlName="nombreEmpresa" (focusout)="findSameBusinessName()">
+            <div mat-icon matSuffix id="alert-msj-businessName">
+                <div *ngIf="sameBusinessName">
+                  <i class="fas fa-times"></i>
+                </div>
+              </div>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="ml-5">
+            <mat-label>Tipo de empresa:</mat-label>
+            <mat-select formControlName="tipoEmpresa">
+              <mat-option value="1">Banco de Sangre</mat-option>
+              <mat-option value="2">Servicio Transfusional</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="ml-5">
+            <mat-label>Dirección:</mat-label>
+            <input matInput formControlName="direccion" type="text">
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="m-auto">
+            <mat-label>Teléfono:</mat-label>
+            <input matInput formControlName="telefono" type="text" (focusout)="findSameNumber()">
+            <div mat-icon matSuffix id="alert-msj-number">
+                <div *ngIf="sameNumber">
+                  <i class="fas fa-times"></i>
+                </div>
+              </div>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Ciudad:</mat-label>
+            <mat-select formControlName="ciudad">
+              <mat-option *ngFor="let city of cities" value="{{ city.idCiudad }}">{{ city.nombreCiudad }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="ml-4">
+            <mat-label>Cuenta bancaria:</mat-label>
+            <input matInput formControlName="cuentaBancaria" [type]="!hide ? 'password' : 'text'">
+            <span mat-icon-button matSuffix (click)="hide = !hide" [attr.arial-label]="'Hide account number'"
+              [attr.arial-pressed]="hide">
+              <div *ngIf="hide; else eye">
+                <i class="fas fa-eye-slash"></i>
+              </div>
+              <ng-template #eye>
+                <div>
+                  <i class="fas fa-eye"></i>
+                </div>
+              </ng-template>
+            </span>
+          </mat-form-field>
+        </div>
+      </form>
+      <button mat-raised-button color="primary" matStepperNext class="btnNext">Siguiente</button>
+    </mat-step>
+    <mat-step label="Datos generales del representante legal" [stepControl]="userData.controls.email">
+      <form [formGroup]="userData">
+        <div class="form-inline">
+          <mat-form-field appearance="outline">
+            <mat-label>Primer Nombre:</mat-label>
+            <input matInput type="text" formControlName="primerNombre">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="ml-3">
+            <mat-label>Segundo Nombre:</mat-label>
+            <input matInput type="text" formControlName="segundoNombre">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Primer Apellido:</mat-label>
+            <input matInput type="text" formControlName="primerApellido">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="ml-3">
+            <mat-label>Segundo Apellido:</mat-label>
+            <input matInput type="text" formControlName="segundoApellido">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Género:</mat-label>
+            <mat-select formControlName="genero">
+              <mat-option value="M">Masculino</mat-option>
+              <mat-option value="F">Femenino</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="form-group">
+            <mat-form-field appearance="outline" class="ml-3">
+              <mat-label>Username:</mat-label>
+              <input matInput type="text" formControlName="username" (focusout)="findSameUser()">
+              <div mat-icon matSuffix id="alert-msj">
+                <div *ngIf="same">
+                  <i class="fas fa-times"></i>
+                </div>
+              </div>
+            </mat-form-field>
+          </div>
+          <mat-form-field appearance="outline">
+            <mat-label>Correo:</mat-label>
+            <input matInput type="email" formControlName="email" (focusout)="findSameEmail()">
+            <div mat-icon matSuffix id="alert-msj-email">
+              <div *ngIf="sameEmail">
+                <i class="fas fa-times"></i>
+              </div>
+            </div>
+          </mat-form-field>
+        </div>
+      </form>
+      <div>
+        <button mat-button matStepperPrevious class="buttoncancelfrst">Atrás</button>
+        <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+      </div>
+    </mat-step>
+    <mat-step label="Confirmación">
+      <h3>Una vez des click en "Terminado" enviaremos un correo a {{this.userData.value.email}} con los datos
+        necesarios para el registro</h3>
+        <button mat-button matStepperPrevious class="buttoncancelfrst">Atrás</button>
+        <button mat-raised-button color="primary" (click)="createBusiness()">Terminado</button>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

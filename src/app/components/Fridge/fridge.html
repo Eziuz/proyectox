@@ -33,9 +33,15 @@
     <mat-cell *matCellDef="let element"> {{element.precio}} </mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="total">
+    <mat-header-cell *matHeaderCellDef> TOTAL </mat-header-cell>
+      <mat-cell *matCellDef>${{ getCostoTotal() }} COP</mat-cell>
+    </ng-container>
+  
+
   <ng-container matColumnDef="accion">
-    <mat-header-cell *matHeaderCellDef> Descartar </mat-header-cell>
-    <mat-cell *matCellDef="let element"> <button class="fas fa-fire"></button> </mat-cell>
+  <mat-header-cell *matHeaderCellDef> Descartar </mat-header-cell>
+    <mat-cell *matCellDef="let element" style="cursor: pointer;" (click)="dropElement(element.index)"> <button class="fas fa-fire"></button></mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -44,5 +50,4 @@
 <div class="d-flex justify-content-between mt-lg-1">
   <button class="btnAction" mat-raised-button [mat-dialog-close]>Cancelar</button>
   <button class="btnAction"  mat-raised-button [mat-dialog-close] (click)="buyElements()" color="primary">Comprar</button>
-
 </div>

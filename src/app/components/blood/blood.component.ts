@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { HemocomponenteService } from 'src/app/services/Hemocomponente.service';
 import { TipoSangreService } from 'src/app/services/TipoSangre.service';
 import { Router } from '@angular/router';
-
+import * as jwt_decode from 'jwt-decode';
 @Component({
   selector: 'app-blood',
   templateUrl: './blood.component.html',
@@ -16,10 +16,10 @@ import { Router } from '@angular/router';
 export class BloodComponent implements OnInit {
 
   constructor(private bloodService: BloodService,
-              private _snackBar: MatSnackBar,
-              private _formBuilder: FormBuilder,
-              public dialog: MatDialog,
-              private hemocomponenteService: HemocomponenteService) { }
+    private _snackBar: MatSnackBar,
+    private _formBuilder: FormBuilder,
+    public dialog: MatDialog,
+    private hemocomponenteService: HemocomponenteService) { }
 
   @BlockUI() blockUI: NgBlockUI;
   resultError: string = null;
@@ -30,9 +30,18 @@ export class BloodComponent implements OnInit {
   arrayFridge = new Array();
 
   ngOnInit() {
-    this.getAll();
     this.getAllHemocomponentes();
+    this.getAll();
     this.formFridge = this.createFridgeForm();
+  }
+  get user(): any {
+    var _user;
+    try {
+      _user = jwt_decode(sessionStorage.getItem('token'));
+    } catch (error) {
+      _user = {};
+    }
+    return _user;
   }
 
   getObjectToFridge(IdCompra) {
@@ -40,8 +49,7 @@ export class BloodComponent implements OnInit {
       return item.idDetalleEntrada === IdCompra;
     });
     const newCantidad = this.formFridge.controls.cantidad.value;
-
-    if (element[0].cantidad >= newCantidad && newCantidad !== 0) {
+    if (element[0].cantidad >= newCantidad && newCantidad !== 0 && newCantidad !== '') {
       this.arrayFridge.push({
         idElemento: element[0].idDetalleEntrada,
         hemocomponente: element[0].hemocomponente,
@@ -53,7 +61,7 @@ export class BloodComponent implements OnInit {
       });
       this.openNotificationDanger('Hemocomponente(s) agregado(s) a la nevera', 'Ok!');
       sessionStorage.setItem('fridge', JSON.stringify(this.arrayFridge));
-    } else if (newCantidad === 0) {
+    } else if (newCantidad === 0 || newCantidad === '') {
       this.openNotificationDanger('Digite un valor diferente de cero', 'Ok!');
     } else {
       this.openNotificationDanger('Ha excedido la cantidad existente', 'Ok!');
@@ -133,9 +141,9 @@ export class AddBloodComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   constructor(private hemocomponenteService: HemocomponenteService,
-              private tipoSangreService: TipoSangreService,
-              private bloodService: BloodService,
-              private router: Router
+    private tipoSangreService: TipoSangreService,
+    private bloodService: BloodService,
+    private router: Router
   ) { }
 
   ngOnInit() {

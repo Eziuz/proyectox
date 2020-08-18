@@ -11,17 +11,30 @@ import { MatTableDataSource, MatSnackBar } from '@angular/material';
 export class FridgeComponent implements OnInit {
 
     fridgeItems: any = [];
-    dataSource: any;
+    dataSource = new MatTableDataSource();
 
     constructor(private _snackBar: MatSnackBar) { }
 
 
-    displayedColumns: string[] = ['hemocomponente', 'cantidad', 'fechaRecoleccion', 'fechaVencimiento', 'sangre', 'precio', 'accion'];
+    displayedColumns: string[] = ['hemocomponente', 'cantidad', 'fechaRecoleccion', 'fechaVencimiento', 
+    'sangre', 'precio', 'total', 'accion'];
 
     ngOnInit() {
         this.fridgeItems = this.getDataFridge();
         this.dataSource = new MatTableDataSource(this.fridgeItems);
         console.log(this.fridgeItems);
+    }
+
+    getCostoTotal() {
+        const fridgeItems = JSON.parse(sessionStorage.getItem('fridge'));
+        return fridgeItems.reduce((sum, value) => (typeof value.precio === 'number' ? sum + (value.precio * value.cantidad) : sum), 0);
+    }
+
+    dropElement(index) {
+        const fridgeItems = JSON.parse(sessionStorage.getItem('fridge'));
+        fridgeItems.splice(index, 1);
+        this.dataSource = fridgeItems;
+        sessionStorage.setItem('fridge', JSON.stringify(fridgeItems));
     }
 
     getDataFridge() {

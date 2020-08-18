@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
 import { retry, tap, catchError } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
+import { RouterLinkWithHref } from '@angular/router';
 
 const httpOptions = {
     observe: null,
     params: null,
+    headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'idEmpresa': ''
+    })
 };
 
 @Injectable({
@@ -28,6 +33,19 @@ export class UserService {
         );
     }
 
+    getAllByBusiness(row) {
+        const sUrl = `${this.serviceUrl}/Administracion/Usuarios/Empresa`;
+        const req = {
+            idEmpresa: row
+        };
+        return this.http.put(sUrl, req, {}).pipe(
+            tap((resp: HttpResponse<any>) => {
+                return resp;
+            }),
+            catchError((error) => this.handleError('user', error))
+        );
+    }
+
     createUser(row, password, idEmpresaI) {
         const request = {
             primerNombre: row.primerNombre,
@@ -42,6 +60,25 @@ export class UserService {
             idRol: row.rol
         };
         const sUrl = `${this.serviceUrl}/Administracion/Usuarios`;
+        return this.http.put(sUrl, request, {}).pipe(
+            tap((resp) => {
+                return resp;
+            }), catchError((error) => this.handleError('user', error))
+        );
+    }
+
+    createAdminUser(row, password) {
+        const request = {
+            primerNombre: row.primerNombre,
+            segundoNombre: row.segundoNombre,
+            primerApellido: row.primerApellido,
+            segundoApellido: row.segundoApellido,
+            genero: row.genero,
+            username: row.username,
+            contrasena: password,
+            correo: row.email
+        };
+        const sUrl = `${this.serviceUrl}/Administracion/Usuarios/RepresentanteLegal`;
         return this.http.put(sUrl, request, {}).pipe(
             tap((resp) => {
                 return resp;

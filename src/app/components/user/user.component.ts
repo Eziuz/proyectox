@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar, MatDialog, MatPaginator, MatTableDataSource, MatSnackBarRef } from '@angular/material';
 import { NgBlockUI, BlockUI } from 'ng-block-ui';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -18,20 +18,27 @@ import { window } from 'rxjs/operators';
 export class UserComponent implements OnInit {
 
   constructor(private userService: UserService,
-    private _snackBar: MatSnackBar,
-    private matPaginator: MatPaginator,
-    private dialog: MatDialog) { }
+              private _snackBar: MatSnackBar,
+              private matPaginator: MatPaginator,
+              private dialog: MatDialog) { }
 
   @BlockUI() blockUI: NgBlockUI;
   users: any = [];
+  
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   displayedColumns: string[] = ['primerNombre', 'segundoNombre', 'primerApellido', 'segundoApellido', 'empresa',
     'genero', 'correo', 'estado'];
   dataSource = new MatTableDataSource();
+  dataSource2 = new MatTableDataSource();
 
   ngOnInit() {
+    this.getUsersByBusiness();
     this.getAllUsers();
     this.matPaginator._intl.itemsPerPageLabel = 'Usuarios por página';
+    this.dataSource.paginator = this.paginator;
+    this.dataSource2.paginator = this.paginator;
   }
 
   getAllUsers() {
@@ -39,6 +46,18 @@ export class UserComponent implements OnInit {
     this.userService.getAll().subscribe((resp) => {
       this.blockUI.stop();
       this.dataSource.data = resp;
+    },
+      (err) => {
+        console.error(err);
+      });
+  }
+
+  getUsersByBusiness() {
+    this.blockUI.start('Cargando Usuarios...');
+    const idEmpresa = this.user.empresa;
+    this.userService.getAllByBusiness(idEmpresa).subscribe((resp) => {
+      this.blockUI.stop();
+      this.dataSource2.data = resp;
     },
       (err) => {
         console.error(err);
@@ -65,12 +84,26 @@ export class UserComponent implements OnInit {
     });
   }
 
+  get user(): any {
+    let _user;
+    try {
+      _user = jwt_decode(sessionStorage.getItem('token'));
+    } catch (error) {
+      _user = {};
+    }
+    return _user;
+  }
+
   openRegister() {
     this.dialog.open(UserRegisterComponent);
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  applyFilter2(filterValue: string) {
+    this.dataSource2.filter = filterValue.trim().toLowerCase();
   }
 
   openNotificationDanger(message: string, action?: string) {
@@ -94,10 +127,11 @@ export class UserRegisterComponent implements OnInit {
   users = [];
   same = false;
   sameEmail = false;
+  change = false;
 
   constructor(private rolService: RolService,
-    private userService: UserService,
-    private _snackBar: MatSnackBar) { }
+              private userService: UserService,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getRoles();
@@ -112,7 +146,7 @@ export class UserRegisterComponent implements OnInit {
       primerApellido: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+')]),
       segundoApellido: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+')]),
       genero: new FormControl('', [Validators.required]),
-      username: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z]+')]),
+      username: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]),
       email: new FormControl('', [Validators.required, Validators.email]),
       rol: new FormControl('', [Validators.required])
     });
@@ -171,12 +205,14 @@ export class UserRegisterComponent implements OnInit {
 
   getRolesPerUser() {
     const rol = this.user.rol;
-    if (rol === '1') {
+    if (rol === '1' && this.change === false) {
       this.removeItemFromArr(this.roles, 1);
       this.removeItemFromArr(this.roles, 1);
-    } else if (rol === '4') {
+      this.change = true;
+    } else if (rol === '4' && this.change === false) {
       this.removeItemFromArr(this.roles, 0);
       this.removeItemFromArr(this.roles, 0);
+      this.change = true;
     }
   }
 
