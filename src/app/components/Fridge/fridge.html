@@ -34,14 +34,14 @@
   </ng-container>
 
   <ng-container matColumnDef="total">
-    <mat-header-cell *matHeaderCellDef> TOTAL </mat-header-cell>
-      <mat-cell *matCellDef>${{ getCostoTotal() }} COP</mat-cell>
+    <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
+      <mat-cell *matCellDef="let element">${{ getCostoTotal(element.precio, element.cantidad) }} COP</mat-cell>
     </ng-container>
   
 
   <ng-container matColumnDef="accion">
   <mat-header-cell *matHeaderCellDef> Descartar </mat-header-cell>
-    <mat-cell *matCellDef="let element" style="cursor: pointer;" (click)="dropElement(element.index)"> <button class="fas fa-fire"></button></mat-cell>
+    <mat-cell *matCellDef="let element" style="cursor: pointer;" (click)="dropElement(element.idElemento)"> <button class="fas fa-fire"></button></mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

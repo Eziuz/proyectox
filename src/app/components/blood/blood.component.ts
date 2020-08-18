@@ -7,6 +7,7 @@ import { HemocomponenteService } from 'src/app/services/Hemocomponente.service';
 import { TipoSangreService } from 'src/app/services/TipoSangre.service';
 import { Router } from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
+import { EntradaService } from 'src/app/services/Entrada.service';
 @Component({
   selector: 'app-blood',
   templateUrl: './blood.component.html',
@@ -16,10 +17,10 @@ import * as jwt_decode from 'jwt-decode';
 export class BloodComponent implements OnInit {
 
   constructor(private bloodService: BloodService,
-    private _snackBar: MatSnackBar,
-    private _formBuilder: FormBuilder,
-    public dialog: MatDialog,
-    private hemocomponenteService: HemocomponenteService) { }
+              private _snackBar: MatSnackBar,
+              private _formBuilder: FormBuilder,
+              public dialog: MatDialog,
+              private hemocomponenteService: HemocomponenteService) { }
 
   @BlockUI() blockUI: NgBlockUI;
   resultError: string = null;
@@ -126,7 +127,7 @@ export class BloodComponent implements OnInit {
 @Component({
   templateUrl: './formBlood.html',
   styleUrls: ['./formBlood.css'],
-  providers: [BloodService, HemocomponenteService, TipoSangreService]
+  providers: [BloodService, HemocomponenteService, TipoSangreService, EntradaService]
 })
 export class AddBloodComponent implements OnInit {
 
@@ -141,12 +142,14 @@ export class AddBloodComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
 
   constructor(private hemocomponenteService: HemocomponenteService,
-    private tipoSangreService: TipoSangreService,
-    private bloodService: BloodService,
-    private router: Router
+              private tipoSangreService: TipoSangreService,
+              private bloodService: BloodService,
+              private router: Router,
+              private hEntrada:EntradaService
   ) { }
 
   ngOnInit() {
+
     this.Entrada = this.createFormGroup();
     this.getAllHemocomponentes();
     this.getAllTipoSangre();
@@ -222,14 +225,43 @@ export class AddBloodComponent implements OnInit {
 
   createBlood() {
     this.blockUI.start('Agregando Hemocomponente...');
-    this.bloodService.createBlood(this.Entrada.value).subscribe((resp) => {
-      alert('Hemocomponente agregado con exito');
-      this.blockUI.stop();
-      window.location.reload();
-    },
+    const usuario = this.user.change;
+    const empresaR = this.user.empresa;
+    const entrada = {
+      npago: this.createNPago(),
+      idPersona: usuario,
+      empresa: empresaR
+    };
+    this.hEntrada.createEntrada(entrada).subscribe((response) => {
+      this.bloodService.createBlood(this.Entrada.value).subscribe((resp) => {
+        alert('Hemocomponente agregado con exito');
+        this.blockUI.stop();
+        window.location.reload();
+      },
       (err) => {
         console.error(err);
       });
+    });
+  }
+
+  createNPago() {
+    const length = 30;
+    const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789[=]';
+    let retVal = '';
+    for (let i = 0, n = charset.length; i < length; ++i) {
+      retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return retVal;
+  }
+
+  get user(): any {
+    let _user;
+    try {
+      _user = jwt_decode(sessionStorage.getItem('token'));
+    } catch (error) {
+      _user = {};
+    }
+    return _user;
   }
 
 }
