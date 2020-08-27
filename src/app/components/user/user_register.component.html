@@ -45,7 +45,7 @@
             </div>
           </div>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field class="rol" appearance="outline">
           <mat-label>Rol:</mat-label>
           <mat-select formControlName="rol">
             <mat-option *ngFor="let rol of roles" value="{{ rol.idRol }}">{{ rol.tipoRol }}</mat-option>
@@ -57,14 +57,10 @@
       </div>
     </mat-step>
     <mat-step label="Confirmación">
-
-      <h3>Aquí debe colocar un mensaje bien bonito de que enviamos un correo a : {{ this.userData.value.email }}</h3>
-
-
-
+      <p class="msj"> Su registro ha sido exitoso, se han enviado los datos correspondientes del usuario al correo: {{ this.userData.value.email }}</p>
       <div>
         <button mat-button matStepperPrevious class="buttoncancelfrst" (click)="form.reset()">Atrás</button>
-        <button mat-raised-button color="primary" (click)="createUser()">Terminado</button>
+        <button mat-raised-button class="buttonsec" color="primary" (click)="createUser()">Terminado</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

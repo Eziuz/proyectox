@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material';
     providers: []
 })
 
-export class PasswordComponent { 
+export class PasswordComponent {
 
     onReset() {
 

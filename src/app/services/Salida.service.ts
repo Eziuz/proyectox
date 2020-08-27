@@ -25,7 +25,7 @@ export class SalidaService {
       nPago: this.createNPago()
     };
     const sUrl = `${this.serviceUrl}/Salida`;
-    return this.http.put(sUrl, request , {}).pipe(
+    return this.http.put(sUrl, request, {}).pipe(
       tap((resp) => {
         return resp;
       }),
@@ -41,7 +41,17 @@ export class SalidaService {
       detalleEntrada: row.idElemento
     };
     const sUrl = `${this.serviceUrl}/DetalleSalida`;
-    return this.http.put(sUrl, request , {}).pipe(
+    return this.http.put(sUrl, request, {}).pipe(
+      tap((resp) => {
+        return resp;
+      }),
+      catchError((error) => this.handleError('Salida', error))
+    );
+  }
+
+  getAllSalida() {
+    const sUrl = `${this.serviceUrl}/DetalleSalida`;
+    return this.http.get(sUrl, {}).pipe(
       tap((resp) => {
         return resp;
       }),

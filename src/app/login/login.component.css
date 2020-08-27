@@ -16,8 +16,9 @@
 
 .login-form-1 {
     background: #1d6ceb;
+    background: url('../../assets/images/Background_2.jpeg') top center;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
-    height: 500px;
+    height: 600px;
 }
 
 .title{
@@ -66,8 +67,7 @@
 }
 
 .btnRegister {
-	box-shadow: 0px 0px 0px 2px #9fb4f2;
-	background-color:#7892c2;
+	box-shadow: 0px 0px 0px 2px #fff;
 	border-radius:42px;
 	display:inline-block;
 	cursor:pointer;
@@ -77,14 +77,31 @@
 	font-weight:bold;
 	padding:12px 37px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #283966;
+    text-shadow:0px 1px 0px #283966;
+    margin-top: 55%;
+    margin-left: 5%;
 }
 .btnRegister:hover {
-	background-color:#476e9e;
+	background-color:#e43c5c;
 }
 .btnRegister:active {
 	position:relative;
 	top:1px;
+}
+.btnSubmit {
+	box-shadow: 0px 0px 0px 2px #e43c5c;
+	border-radius:42px;
+    display:inline-block;
+    background-color:#e43c5c;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:19px;
+	font-weight:bold;
+	padding:10px 35px;
+    text-decoration:none;
+    margin-top: 24%;
+    text-shadow:0px 1px 0px #283966;
 }
 
 /*Funciones de Responsive*/

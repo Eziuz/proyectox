@@ -1,0 +1,40 @@
+<div>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="Precio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio pagado </th>
+      <td mat-cell *matCellDef="let element"> {{element.precio}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="Cantidad">
+      <th mat-header-cell *matHeaderCellDef> Cantidad hemocomponentes comprados</th>
+      <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="Descuento">
+      <th mat-header-cell *matHeaderCellDef> Descuento recibido </th>
+      <td mat-cell *matCellDef="let element"> {{element.descuento}}% </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Hemocomponente">
+      <th mat-header-cell *matHeaderCellDef> Hemocomponente Comprado </th>
+      <td mat-cell *matCellDef="let element"> {{element.tipoHemocomponente}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Empresa">
+      <th mat-header-cell *matHeaderCellDef> Empresa </th>
+      <td mat-cell *matCellDef="let element"> {{element.empresa1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Empresa vendedora">
+      <th mat-header-cell *matHeaderCellDef> Empresa vendedora </th>
+      <td mat-cell *matCellDef="let element"> {{element.empresa2}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

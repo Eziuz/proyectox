@@ -1,3 +1,4 @@
+
 .mat-sidenav-container-logged {
   position: absolute;
   top: 0;
@@ -15,7 +16,7 @@ img {
 
 mat-sidenav {
   width: 20%;
-  background: #1d6ceb;
+  background: #fff;
 }
 
 mat-toolbar {
@@ -31,7 +32,7 @@ mat-toolbar-row {
 }
 
 mat-sidenav ul li a {
-  color: white;
+  color: #e43c5c;
   text-decoration: none;
 }
 
@@ -42,11 +43,16 @@ mat-sidenav ul li {
 .icon {
   float: left;
   margin-right: 10px;
+  color: #e43c5c;
 }
 
 mat-toolbar {
-  background-color: #1d6ceb;
-  height: 15%;
+  transition: all 0.5s;
+  z-index: 997;
+  padding: 10px 10px 45px 5px;
+  background-color: #fff;
+  color: #e43c5c;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
 }
 
 mat-sidenav .menu ul {
@@ -87,17 +93,24 @@ li>ul {
 
 /* logo de cabecera*/
 .logoHead{
-  height: 100px;
-  margin-bottom: 5%;
-  float: left;
+  height: 40px;
+  width: 140px;
+  font-size: 32px;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
+
 
 /*Boton de side-bar*/
 
 .menuButton{
   height: 30px ;
   width: 30px;
-  color: white;
+  color: #e43c5c;
 }
 
 
@@ -108,6 +121,6 @@ li>ul {
 /*log-out button*/
 
 .logout{
-  color: white;
+  color: #e43c5c;
   margin-right: 50px;
 }

@@ -1,9 +1,9 @@
 <div *ngIf="user.rol == 1">
-  <button type="button" class="btn btn-primary" *ngIf="user.rol != 5" (click)="openRegister()">
+  <button type="button" class="btn btn-primary btnRegister" *ngIf="user.rol != 5" (click)="openRegister()">
     Registrar Usuario
   </button>
   <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro:">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro:" autocomplete="off">
   </mat-form-field>
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
@@ -58,11 +58,11 @@
 </div>
 
 <div *ngIf="user.rol != 1">
-  <button type="button" class="btn btn-primary" *ngIf="user.rol != 5" (click)="openRegister()">
+  <button type="button" class="btn btn-primary btnRegister" *ngIf="user.rol != 5" (click)="openRegister()">
     Registrar Usuario
   </button>
   <mat-form-field>
-    <input matInput (keyup)="applyFilter2($event.target.value)" placeholder="Filtro:">
+    <input matInput (keyup)="applyFilter2($event.target.value)" placeholder="Filtro:" autocomplete="off">
   </mat-form-field>
   <table mat-table [dataSource]="dataSource2" matSort class="mat-elevation-z8">
 

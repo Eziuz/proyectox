@@ -7,7 +7,7 @@ import { UserService } from './user.service';
 import * as jwt_decode from 'jwt-decode';
 import { RolService } from 'src/app/services/rol.service';
 import emailjs, { EmailJSResponseStatus } from 'emailjs-com';
-import { window } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-user',
@@ -24,7 +24,6 @@ export class UserComponent implements OnInit {
 
   @BlockUI() blockUI: NgBlockUI;
   users: any = [];
-  
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -78,6 +77,7 @@ export class UserComponent implements OnInit {
       }
       this.userService.updateUserStatus(row, newStatus).subscribe((resp) => {
         this.openNotificationDanger('Se ha cambiado el estado del usuario con éxito', 'Ok!');
+        window.location.reload();
       }, (err) => {
         this.openNotificationDanger('No hemos podido actualizar el estado debido a: ' + err);
       });

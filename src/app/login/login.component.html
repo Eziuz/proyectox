@@ -2,14 +2,12 @@
     <div class="row">
         <div class="col-md-9 login-form-1">
             <div class="img2">
-                <img src="../../assets/images/Gotita.png">
                 <a routerLink="/registerbusiness" class="btnRegister">Registrate!</a>
             </div>
-            <h1 class="title">BIENVENIDO A HEMOTEC</h1>
         </div>
         <div class="col-md-3 login-form-2">
             <div class="img">
-                <img src="../../assets/images/logo.png">
+                <img src="../../assets/images/Recurso 3.png">
             </div>
             <form autocomplete="off" [formGroup]="loginForm">
                 <mat-form-field appearance="outline">
@@ -34,7 +32,7 @@
                 <mat-error *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">Clave Inválida</mat-error>
                 <div class="actions">
                     <span><a routerLink="/changePassword">Olvidaste tu contraseña?</a></span>
-                    <button type="submit" class="btn-in btn btn-primary btn-lg btn-block" mat-button [disabled]="!loginForm.valid" (click)="onSubmit()">Iniciar Sesión </button>
+                    <button type="submit" class="btnSubmit btn-lg btn-block" mat-button [disabled]="!loginForm.valid" (click)="onSubmit()">Iniciar Sesión </button>
                 </div>
             </form>
         </div>
