@@ -59,6 +59,16 @@ export class SalidaService {
     );
   }
 
+  getReports() {
+    const sUrl = `${this.serviceUrl}/DetalleSalida/reports`;
+    return this.http.get(sUrl, {}).pipe(
+      tap((resp) => {
+        return resp;
+      }),
+      catchError((error) => this.handleError('Reports', error))
+    );
+  }
+
   handleError(operation = 'operation', result?: any) {
     console.log(result.error);
     this.log(`${operation} failed: ${result.message}`);

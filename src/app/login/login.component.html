@@ -1,4 +1,4 @@
-<div class="container login-container">
+<div class="container login-container" *ngIf="!isLogin">
     <div class="row">
         <div class="col-md-9 login-form-1">
             <div class="img2">
@@ -10,12 +10,12 @@
                 <img src="../../assets/images/Recurso 3.png">
             </div>
             <form autocomplete="off" [formGroup]="loginForm">
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="standard">
                     <mat-label>Usuario:</mat-label>
                     <input matInput type="text" formControlName="username">
                 </mat-form-field>
                 <mat-error *ngIf="loginForm.controls.username.invalid && loginForm.controls.username.touched">Usuario Inválido</mat-error>
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="standard">
                     <mat-label>Clave:</mat-label>
                     <input matInput [type]="!hide ? 'password' : 'text'" name="password" formControlName="password" (keydown)="handleKeyPress($event, loginForm)">
                     <span mat-icon-button matSuffix (click)="hide = !hide" [attr.arial-label]="'Hide password'" [attr.arial-pressed]="hide">

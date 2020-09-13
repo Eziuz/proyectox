@@ -38,7 +38,7 @@
               <mat-option *ngFor="let city of cities" value="{{ city.idCiudad }}">{{ city.nombreCiudad }}</mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="fill" class="ml-4">
+          <mat-form-field appearance="fill" class="ml-5">
             <mat-label>Cuenta bancaria:</mat-label>
             <input matInput formControlName="cuentaBancaria" [type]="!hide ? 'password' : 'text'">
             <span mat-icon-button matSuffix (click)="hide = !hide" [attr.arial-label]="'Hide account number'"
@@ -60,7 +60,7 @@
     <mat-step label="Datos generales del representante legal" [stepControl]="userData.controls.email">
       <form [formGroup]="userData">
         <div class="form-inline">
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" class="ml-3">
             <mat-label>Primer Nombre:</mat-label>
             <input matInput type="text" formControlName="primerNombre">
           </mat-form-field>
@@ -68,7 +68,7 @@
             <mat-label>Segundo Nombre:</mat-label>
             <input matInput type="text" formControlName="segundoNombre">
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" class="ml-3">
             <mat-label>Primer Apellido:</mat-label>
             <input matInput type="text" formControlName="primerApellido">
           </mat-form-field>
@@ -76,7 +76,7 @@
             <mat-label>Segundo Apellido:</mat-label>
             <input matInput type="text" formControlName="segundoApellido">
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" class="ml-3">
             <mat-label>Género:</mat-label>
             <mat-select formControlName="genero">
               <mat-option value="M">Masculino</mat-option>
@@ -94,7 +94,7 @@
               </div>
             </mat-form-field>
           </div>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" class="ml-3">
             <mat-label>Correo:</mat-label>
             <input matInput type="email" formControlName="email" (focusout)="findSameEmail()">
             <div mat-icon matSuffix id="alert-msj-email">

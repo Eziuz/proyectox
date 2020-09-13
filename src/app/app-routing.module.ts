@@ -41,6 +41,10 @@ const routes: Routes = [
     loadChildren: () => import('./components/salidas/salidas.component.module').then(mod => mod.SalidaModule)
   },
   {
+    path: 'reports',
+    loadChildren: () => import('./components/reports/report.module').then(mod => mod.ReportModule)
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }

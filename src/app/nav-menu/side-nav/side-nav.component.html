@@ -3,10 +3,11 @@
     <img src="../../../assets/images/logoSide.png" alt="Logo Hemotec">
     <mat-nav-list role="navigation" style="width: inherit;">
       <ul class="menu">
-        <li><a mat-list-item routerLink="/users"><i class="icon fas fa-city"></i>Empresa</a> </li>
-        <li> <a mat-list-item routerLink="/hemocomponentes"><i class="icon fas fa-book-medical"></i>Hemocomponentes</a>
+        <li> <a mat-list-item routerLink="/users"><i class="icon fas fa-city"></i>Empresa</a> </li>
+        <li> <a mat-list-item routerLink="/hemocomponentes"><i class="icon fas fa-book-medical active"></i>Hemocomponentes</a>
         </li>
-        <li><a mat-list-item routerLink="/getaway"><i class="icon fas fa-poll"></i>Reportes</a></li>
+        <li> <a mat-list-item routerLink="/getaway"><i class="icon fas fa-poll"></i>Transacciones</a> </li>
+        <li> <a mat-list-item routerLink="/reports"><i class="icon far fa-clipboard"></i> Reportes</a> </li>
       </ul>
     </mat-nav-list>
   </mat-sidenav>
@@ -15,16 +16,21 @@
       <mat-toolbar-row class="d-flex justify-content-between">
         <mat-icon class="menuButton" (click)="sidenav.toggle()" style="cursor: pointer;">menu</mat-icon>
         <img class="logoHead" src="../../../assets/img/Campaign/logohead.png" alt="Cabecera Hemotec">
-        <section *ngIf="user.tipoEmpresa == 1">
-          <button class="btn btn-danger" (click)="openDialog()">Agregar</button>
-        </section>
-        <section>
-          <button class="btn btn-danger" (click)="openFridge()">Nevera</button>
-        </section>
-        {{ user.tipoRol }}: {{ user.iss }}<i class="fas fa-user"></i>
-        <span style="cursor: pointer;" (click)="logout()">
-          <i class="logout fas fa-power-off"></i>
-        </span>
+        <div class="box">
+          <section *ngIf="user.tipoEmpresa == 1">
+            <button class="btn btn-danger add" (click)="openDialog()">+</button>
+          </section>
+          <section>
+            <img class="fridge" src="../../../assets/images/Nevera.png" alt="aquí debería haber un botón :v" (click)="openDialog()" >
+          </section>
+          <!-- #docregion mat-menu-trigger-for -->
+          <button mat-button [matMenuTriggerFor]="menu" class="window"><i class="fas fa-user user"></i> <p>{{user.iss}}</p></button>
+          <!-- #enddocregion mat-menu-trigger-for -->
+          <mat-menu #menu="matMenu">
+          <label mat-menu-item>{{user.tipoRol}}</label>
+          <button mat-menu-item (click)="logout()">Cerrar Sesión</button>
+          </mat-menu>
+        </div>
       </mat-toolbar-row>
     </mat-toolbar>
     <router-outlet></router-outlet>

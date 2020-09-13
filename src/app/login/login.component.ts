@@ -13,7 +13,7 @@ import { MatSnackBar, MatBottomSheet } from '@angular/material';
   styleUrls: ['./login.component.css'],
   providers: [ LoginService ],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   constructor(private builder: FormBuilder,
               private loginService: LoginService,
@@ -42,8 +42,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-
+  get isLogin(): boolean {
+    return JSON.parse(sessionStorage.getItem('isLogin') || 'false');
   }
 
   onSubmit() {

@@ -124,3 +124,28 @@ li>ul {
   color: #e43c5c;
   margin-right: 50px;
 }
+
+.fridge{
+  height: 60px;
+  width: 45px; 
+  margin-right: 60px;
+  margin-bottom: 20px;
+}
+
+.add{
+  border-radius: 900px 900px;
+  font-size: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+
+}
+
+.user{
+  height: 27px;
+  width: 45px;
+}
+
+box{
+  display: inline-block;
+  padding: 10px;
+}
