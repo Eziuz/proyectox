@@ -14,6 +14,9 @@ export class ReportComponent implements OnInit {
 
     Chart = [];
     Reportes = [];
+    ReportesPlaquetas = [];
+    ReportesGlobulos = [];
+    ReportesPlasma = [];
     months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sept', 'Oct', 'Nov', 'Dic'];
 
     constructor(private salidaService: SalidaService) {
@@ -47,28 +50,116 @@ export class ReportComponent implements OnInit {
                     datasets: [{
                         label: 'Seguimiento Hemocomponentes Vendidos Dentro De La Aplicación',
                         data: cantidad,
-                        backgroundColor: [
-                            'rgb(230, 0, 0)'
-                        ],
                         fill: false,
                         borderColor: [
-                            'rgb(230, 0, 0)',
+                            'rgb(255, 0, 0)',
                         ],
                         borderWidth: 3
+                    },
+                    {
+                        label: 'Seguimiento de Plaquetas',
+                        data: this.getReportsPlaquetas(),
+                        fill: false,
+                        borderColor: [
+                            'rgb(224, 227, 227)'
+                        ],
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Seguimiento de Glóbulos',
+                        data: this.getReportsGlobulos(),
+                        fill: false,
+                        borderColor: [
+                            'rgb(225, 0, 0)'
+                        ],
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Seguimiento de Plasma',
+                        data: this.getReportsPlasma(),
+                        fill: false,
+                        borderColor: [
+                            'rgb(0, 255, 0)'
+                        ],
+                        borderWidth: 2
                     }]
                 },
                 options: {
                     scales: {
                         yAxes: [{
-                            stacked: true
+                            stacked: false
                         }]
                     }
                 }
             });
-            console.log(cantidad);
         }, (error) => {
             console.error(error);
         });
     }
 
+    getReportsPlaquetas() {
+        const cantidadPlaquetas = [];
+        this.salidaService.getReportsPlaquetas().subscribe((resp) => {
+            this.ReportesPlaquetas = resp;
+            for (let i = 0; i < this.ReportesPlaquetas.length; i++) {
+                for (let index = 0; index < 11; index++) {
+                    if (this.Reportes[i].mes === index) {
+                        cantidadPlaquetas[index - 1] = this.ReportesPlaquetas[i].cantidad;
+                        break;
+                    } else {
+                        if (cantidadPlaquetas[index] === 0 || cantidadPlaquetas[index] === 'empty') {
+                            cantidadPlaquetas[index] = 0;
+                        }
+                    }
+                }
+            }
+        }, (error) => {
+            console.error(error);
+        });
+        return cantidadPlaquetas;
+    }
+
+    getReportsGlobulos() {
+        const cantidadGlobulos = [];
+        this.salidaService.getReportsGlobulos().subscribe((resp) => {
+            this.ReportesGlobulos = resp;
+            for (let i = 0; i < this.ReportesGlobulos.length; i++) {
+                for (let index = 0; index < 11; index++) {
+                    if (this.ReportesGlobulos[i].mes === index) {
+                        cantidadGlobulos[index - 1] = this.ReportesGlobulos[i].cantidad;
+                        break;
+                    } else {
+                        if (cantidadGlobulos[index] === 0 || cantidadGlobulos[index] === 'empty') {
+                            cantidadGlobulos[index] = 0;
+                        }
+                    }
+                }
+            }
+        }, (error) => {
+            console.error(error);
+        });
+        return cantidadGlobulos;
+    }
+
+    getReportsPlasma() {
+        const cantidadPlasma = [];
+        this.salidaService.getReportsPlasma().subscribe((resp) => {
+            this.ReportesPlasma = resp;
+            for (let i = 0; i < this.ReportesPlasma.length; i++) {
+                for (let index = 0; index < 11; index++) {
+                    if (this.ReportesPlasma[i].mes === index) {
+                        cantidadPlasma[index - 1] = this.ReportesPlasma[i].cantidad;
+                        break;
+                    } else {
+                        if (cantidadPlasma[index] === 0 || cantidadPlasma[index] === 'empty') {
+                            cantidadPlasma[index] = 0;
+                        }
+                    }
+                }
+            }
+        }, (error) => {
+            console.error(error);
+        });
+        return cantidadPlasma;
+    }
 }

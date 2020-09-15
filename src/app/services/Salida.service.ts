@@ -69,6 +69,36 @@ export class SalidaService {
     );
   }
 
+  getReportsPlaquetas() {
+    const sUrl = `${this.serviceUrl}/DetalleSalida/reportsPlaquetas`;
+    return this.http.get(sUrl, {}).pipe(
+      tap((resp) => {
+        return resp;
+      }),
+      catchError((error) => this.handleError('Reports', error))
+    );
+  }
+
+  getReportsGlobulos() {
+    const sUrl = `${this.serviceUrl}/DetalleSalida/reportsGlobulos`;
+    return this.http.get(sUrl, {}).pipe(
+      tap((resp) => {
+        return resp;
+      }),
+      catchError((error) => this.handleError('Reports', error))
+    );
+  }
+
+  getReportsPlasma() {
+    const sUrl = `${this.serviceUrl}/DetalleSalida/reportsPlasma`;
+    return this.http.get(sUrl, {}).pipe(
+      tap((resp) => {
+        return resp;
+      }),
+      catchError((error) => this.handleError('Reports', error))
+    );
+  }
+
   handleError(operation = 'operation', result?: any) {
     console.log(result.error);
     this.log(`${operation} failed: ${result.message}`);
