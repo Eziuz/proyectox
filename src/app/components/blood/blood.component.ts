@@ -145,7 +145,8 @@ export class AddBloodComponent implements OnInit {
               private tipoSangreService: TipoSangreService,
               private bloodService: BloodService,
               private router: Router,
-              private hEntrada:EntradaService
+              private hEntrada: EntradaService,
+              private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -234,7 +235,7 @@ export class AddBloodComponent implements OnInit {
     };
     this.hEntrada.createEntrada(entrada).subscribe((response) => {
       this.bloodService.createBlood(this.Entrada.value).subscribe((resp) => {
-        alert('Hemocomponente agregado con exito');
+        this.openNotificationDanger('Hemocomponente agregado con exito', 'Ok!');
         this.blockUI.stop();
         window.location.reload();
       },
@@ -264,4 +265,9 @@ export class AddBloodComponent implements OnInit {
     return _user;
   }
 
+  openNotificationDanger(message: string, action?: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000,
+    });
+  }
 }

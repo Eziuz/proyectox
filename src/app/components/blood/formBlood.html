@@ -1,4 +1,4 @@
-<form [formGroup]="Entrada" #form>
+<form [formGroup]="Entrada" #form autocomplete="off">
   <mat-horizontal-stepper linear #stepper class="modalContainer">
     <mat-step label="Datos generales" [stepControl]="Entrada.controls.tipoSangre">
       <mat-form-field>

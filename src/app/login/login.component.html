@@ -32,7 +32,7 @@
                 <mat-error *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">Clave Inválida</mat-error>
                 <div class="actions">
                     <span><a routerLink="/changePassword">Olvidaste tu contraseña?</a></span>
-                    <button type="submit" class="btnSubmit btn-lg btn-block" mat-button [disabled]="!loginForm.valid" (click)="onSubmit()">Iniciar Sesión </button>
+                    <button type="submit" class="btnSubmit btn-lg" mat-button [disabled]="!loginForm.valid" (click)="onSubmit()">Iniciar Sesión </button>
                 </div>
             </form>
         </div>

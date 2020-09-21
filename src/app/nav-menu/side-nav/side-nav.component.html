@@ -1,6 +1,6 @@
 <mat-sidenav-container class="mat-sidenav-container-logged">
   <mat-sidenav #sidenav mode="over" [(opened)]="opened">
-    <img src="../../../assets/images/logoSide.png" alt="Logo Hemotec">
+    <img class="logoSide" src="../../../assets/img/Campaign/logohead.png" alt="Logo Hemotec">
     <mat-nav-list role="navigation" style="width: inherit;">
       <ul class="menu">
         <li> <a mat-list-item routerLink="/users"><i class="icon fas fa-city"></i>Empresa</a> </li>
@@ -21,7 +21,7 @@
             <button class="btn btn-danger add" (click)="openDialog()">+</button>
           </section>
           <section>
-            <img class="fridge" src="../../../assets/images/Nevera.png" alt="aquí debería haber un botón :v" (click)="openDialog()" >
+            <img class="fridge" src="../../../assets/images/Nevera.png" alt="aquí debería haber un botón :v" (click)="openFridge()" >
           </section>
           <!-- #docregion mat-menu-trigger-for -->
           <button mat-button [matMenuTriggerFor]="menu" class="window"><i class="fas fa-user user"></i> <p>{{user.iss}}</p></button>

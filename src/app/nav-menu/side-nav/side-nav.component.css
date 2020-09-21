@@ -104,7 +104,14 @@ li>ul {
   text-transform: uppercase;
 }
 
+/* logo de Sidenav */
 
+.logoSide{
+  height: 40px;
+  width: 140px;
+  margin-top: 15%;
+  margin-bottom: 7%;
+}
 /*Boton de side-bar*/
 
 .menuButton{

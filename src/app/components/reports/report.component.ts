@@ -61,7 +61,7 @@ export class ReportComponent implements OnInit {
                         data: this.getReportsPlaquetas(),
                         fill: false,
                         borderColor: [
-                            'rgb(224, 227, 227)'
+                            'rgb(163, 73, 164)'
                         ],
                         borderWidth: 2
                     },
