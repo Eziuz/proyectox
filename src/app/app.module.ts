@@ -22,7 +22,6 @@ import { UserRegisterComponent } from './components/user/user.component';
     AddBloodComponent,
     FridgeComponent,
     NotFoundComponent,
-    MainComponent,
     UserRegisterComponent
   ],
   entryComponents: [

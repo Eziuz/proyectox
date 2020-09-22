@@ -17,7 +17,7 @@
                 <mat-error *ngIf="loginForm.controls.username.invalid && loginForm.controls.username.touched">Usuario Inválido</mat-error>
                 <mat-form-field appearance="standard">
                     <mat-label>Clave:</mat-label>
-                    <input matInput [type]="!hide ? 'password' : 'text'" name="password" formControlName="password" (keydown)="handleKeyPress($event, loginForm)">
+                    <input matInput [type]="!hide ? 'password' : 'text'" name="password" formControlName="password" (keydown)="handleKeyPress($event)">
                     <span mat-icon-button matSuffix (click)="hide = !hide" [attr.arial-label]="'Hide password'" [attr.arial-pressed]="hide">
                         <div *ngIf="hide; else eye">
                             <i class="fas fa-eye-slash"></i>
